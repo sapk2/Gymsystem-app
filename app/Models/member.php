@@ -18,4 +18,10 @@ class member extends Model
         'phone_no',
         'joining_date'
     ];
-}
+    public function user(){
+        return $this ->belongsTo(User::class);
+    }
+    public function plan(){
+        return $this ->belongsTo(plan::class);
+    }
+} 

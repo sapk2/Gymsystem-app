@@ -15,7 +15,9 @@ class MembershipregisterCcontroller extends Controller
     public function index()
     {
         $mem = member::all();
-        return view('admin.managemembers.index', compact('mem'));
+        $user = User::where('roles','member')->get();
+        $plan=plan::all();
+        return view('admin.managemembers.index', compact('mem','user','plan'));
     }
 
     /**
@@ -63,7 +65,7 @@ class MembershipregisterCcontroller extends Controller
         $user = User::all();
         $plan = plan::all();
         $mem = member::findorfail($id);
-        return view('admin.managermembers', compact('user', 'plan', 'mem'));
+        return view('admin.managemembers.edit', compact('user', 'plan', 'mem'));
     }
 
     /**

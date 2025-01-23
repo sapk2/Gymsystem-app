@@ -28,12 +28,12 @@
                 <button id="closeSidebar" class="text-white focus:outline-none">✖</button>
             </div>
             <ul class="mt-4 space-y-2">
-                <li><a href="" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Dashboard</a></li>
+                <li><a href="{{route('admin.dashboard')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Dashboard</a></li>
                 <li><a href="{{route('admin.plans.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Subscription Plan</a></li>
-                <li><a href="{{route('admin.managemembers.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Members</a></li>
-                <li><a href="" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Memberships</a></li>
-                <li><a href="" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Schedules</a></li>
-                <li><a href="" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Attendance</a></li>
+                <li><a href="{{route('admin.managemembers.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Membership</a></li>
+                <li><a href="{{route('admin.managetrainers.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Trainer</a></li>
+                <li><a href="{{route('admin.routines.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Schedules</a></li>
+                <li><a href="{{route('admin.attendances.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Attendance</a></li>
                 <li><a href="" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Payments</a></li>
                 <li><a href="{{route('admin.users.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Users</a></li>
                 <li><a href="" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Health status</a></li>

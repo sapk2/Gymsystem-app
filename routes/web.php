@@ -1,11 +1,16 @@
 <?php
 
+use App\Http\Controllers\AttendenceController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MembershipregisterCcontroller;
 use App\Http\Controllers\PlansController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoutineController;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\Usercontroller;
+use App\Http\Middleware\admin;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -37,10 +42,35 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin/managemembers-create',[MembershipregisterCcontroller::class,'create'])->name('admin.managemembers.create');
     Route::post('/admin/managemembers/store',[MembershipregisterCcontroller::class,'store'])->name('admin.managemembers.store');
     Route::get('/admin/managemembers/{id}/edit',[MembershipregisterCcontroller::class,'edit'])->name('admin.managemembers.edit');
-    Route::get('/admin/managemembers/{id}/update',[MembershipregisterCcontroller::class,'update'])->name('admin.managemembers.update');
+    Route::post('/admin/managemembers/{id}/update',[MembershipregisterCcontroller::class,'update'])->name('admin.managemembers.update');
     Route::get('/admin/managemembers/{id}/delete',[MembershipregisterCcontroller::class,'delete'])->name('admin.managemembers.delete');
 
-    
+    /*************************************Manage trainer****************************************************************************************************************************************** */
+    Route::get('/admin/managetrainers',[TrainerController::class,'index'])->name('admin.managetrainers.index');
+    Route::get('/managetrainers-create',[TrainerController::class,'create'])->name('admin.managetrainers.create');
+    Route::post('/managetrainers/store',[TrainerController::class,'store'])->name('admin.managetrainers.store');
+    Route::get( 'managetrainers/{id}/edit',[TrainerController::class,'edit'])->name('admin.managetrainers.edit');
+    Route::post('/managetrainers/{id}/update',[TrainerController::class,'update'])->name('admin.managetrainers.update');
+    Route::get('/managetrainers/{id}/delete',[TrainerController::class,'delete'])->name('admin.managetrainers.delete');
+
+/****************************************routines manage****************************************************************************************** */
+    Route::get('/admin/routines',[RoutineController::class,'index'])->name('admin.routines.index');
+    Route::get('/routines-create',[RoutineController::class,'create'])->name('admin.routines.create');
+    Route::post('routines/store',[RoutineController::class,'store'])->name('admin.routines.store');
+    Route::get('/routines/{id}/edit',[RoutineController::class,'edit'])->name('admin.routines.edit');
+    Route::get('/routines/{id}/show',[RoutineController::class,'show'])->name('admin.routines.show');
+    Route::post('/routines/{id}/update',[RoutineController::class,'update'])->name('admin.routines.update');
+    Route::get('/routines/{id}/delete',[RoutineController::class,'delete'])->name('admin.routines.delete');
+
+    /*********************************************Manage Attendance****************************************************************************** */
+    Route::get('/admin/attendance',[AttendenceController::class,'index'])->name('admin.attendances.index');
+    Route::get('/attendances-create',[AttendenceController::class,'create'])->name('admin.attendances.create');
+    Route::post('/attendances/store',[AttendenceController::class,'store'])->name('admin.attendances.store');
+    Route::get('/attendances/{id}/edit',[AttendenceController::class,'edit'])->name('admin.attendances.edit');
+    Route::post('/attendances/{id}/update',[AttendenceController::class,'update'])->name('admin.attendances.update');
+    Route::get('/attendances/{id}/delete',[AttendenceController::class,'delete'])->name('admin.attendances.delete');
+
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
