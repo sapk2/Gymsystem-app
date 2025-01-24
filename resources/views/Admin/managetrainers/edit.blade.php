@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
 <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900 dark:text-gray-100">
                 <div class="container mt-2">
-                    <h1 class="text-2xl text-white">Create</h1>
+                    <h1 class="text-2xl text-white">Edit</h1>
                     <hr class="border">
 
                     <form action="{{route('admin.managetrainers.update',$trainer->id)}}" method="post" enctype="multipart/form-data">
@@ -37,8 +37,8 @@
                         @enderror
                         </div>
                         <div class="flex justify-center mt-6">
-                            <input type="submit" class="text-white-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-white-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" value="submit">
-                            <a href="{{route('admin.managetrainers.index')}}" class="text-white-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 text-white-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Back</a>
+                            <input type="submit" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" value="submit">
+                            <a href="{{route('admin.managetrainers.index')}}" class="bg-gray-500 hover:bg-gray-400 text-white ml-4 font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded">Back</a>
                         </div>
                     </form>
                 </div>

@@ -27,16 +27,16 @@
             <div class="p-4 flex justify-end items-center">
                 <button id="closeSidebar" class="text-white focus:outline-none">✖</button>
             </div>
-            <ul class="mt-4 space-y-2">
+            <ul class="mt-2 ">
                 <li><a href="{{route('admin.dashboard')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Dashboard</a></li>
                 <li><a href="{{route('admin.plans.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Subscription Plan</a></li>
                 <li><a href="{{route('admin.managemembers.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Membership</a></li>
                 <li><a href="{{route('admin.managetrainers.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Trainer</a></li>
                 <li><a href="{{route('admin.routines.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Schedules</a></li>
                 <li><a href="{{route('admin.attendances.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Attendance</a></li>
+                <li><a href="{{route('admin.healthstatus.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Health status</a></li>
                 <li><a href="" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Payments</a></li>
                 <li><a href="{{route('admin.users.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Users</a></li>
-                <li><a href="" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Health status</a></li>
                 <li>
                     <form action="{{ route('logout') }}" method="POST" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">
                         @csrf
@@ -63,7 +63,7 @@
                     <div id="dropdownAvatar" class="z-10 hidden absolute right-0 mt-9 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                         <div class="px-2 py-3 text-sm text-gray-900 dark:text-white">
                         <div>{{Auth::user()->name}}</div>
-                        <div class="font-medium truncate">name@flowbite.com</div>
+                        <div class="font-medium truncate">{{Auth::user()->email}}</div>
                         </div>
                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserAvatarButton">
                             <li>
@@ -85,6 +85,36 @@
 
             <!-- Page Content -->
             <main class="p-4">
+                @if (session('sucess'))
+                <div id="alert-border-3" class="flex items-center p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800" role="alert">
+                    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                    </svg>
+                    <div class="ms-3 text-sm font-medium">
+                    {{session('sucess')}}
+                    </div>
+                    <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"  data-dismiss-target="#alert-border-3" aria-label="Close">
+                    <span class="sr-only">Dismiss</span>
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    </button>
+                </div>
+                @endif
+                <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                        const dismissButtons = document.querySelectorAll("[data-dismiss-target]");
+                        dismissButtons.forEach((button) => {
+                            button.addEventListener("click", () => {
+                                const target = button.getAttribute("data-dismiss-target");
+                                const alertElement = document.querySelector(target);
+                                if (alertElement) {
+                                    alertElement.style.display = "none";
+                                }
+                            });
+                        });
+                    });
+                    </script>
                 @yield('content')
             </main>
         </div>

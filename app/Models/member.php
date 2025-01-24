@@ -16,12 +16,15 @@ class member extends Model
         'gender',
         'dob',
         'phone_no',
-        'joining_date'
+        'joining_date',
+        'expirydate'
     ];
     public function user(){
         return $this ->belongsTo(User::class);
     }
-    public function plan(){
-        return $this ->belongsTo(plan::class);
-    }
+    public function plan()
+{
+    return $this->belongsTo(Plan::class);
+}
+
 } 

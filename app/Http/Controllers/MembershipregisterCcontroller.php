@@ -16,8 +16,8 @@ class MembershipregisterCcontroller extends Controller
     {
         $mem = member::all();
         $user = User::where('roles','member')->get();
-        $plan=plan::all();
-        return view('admin.managemembers.index', compact('mem','user','plan'));
+        
+        return view('admin.managemembers.index', compact('mem','user'));
     }
 
     /**
@@ -43,10 +43,11 @@ class MembershipregisterCcontroller extends Controller
             'gender' => 'required',
             'dob' => 'required',
             'phone_no' => 'required',
-            'joining_date' => 'required'
+            'joining_date' => 'required',
+            'expirydate' => 'required'
         ]);
         member::create($data);
-        return redirect()->route('admin.managemembers.index')->with('sucess', 'member has been registered');
+        return redirect()->route('admin.managemembers.index')->with('sucess', 'Member has been registered !!');
     }
 
     /**
@@ -54,7 +55,10 @@ class MembershipregisterCcontroller extends Controller
      */
     public function show(string $id)
     {
-        //
+        $mem=member::findorfail($id);
+        $plan=plan::all();
+        $mem = Member::with('plan')->get();
+        return view('admin.managemembers.show',compact('mem','plan'));
     }
 
     /**
@@ -81,11 +85,12 @@ class MembershipregisterCcontroller extends Controller
             'gender' => 'required',
             'dob' => 'required',
             'phone_no' => 'required',
-            'joining_date' => 'required'
+            'joining_date' => 'required',
+            'expirydate' => 'required'
         ]);
         $mem = member::findorfail($id);
         $mem->update($data);
-        return redirect()->route('admin.managemembers.index')->with('sucess', 'member has been updated sucessfully');
+        return redirect()->route('admin.managemembers.index')->with('sucess', 'Data has been updated sucessfully!!');
     }
 
     /**
@@ -94,7 +99,8 @@ class MembershipregisterCcontroller extends Controller
     public function delete(string $id)
     {
         $mem = member::findorfail($id);
+        
         $mem->delete();
-        return redirect()->route('admin.managemembers.index')->with('sucess', 'membership deleted sucessfully');
+        return redirect()->route('admin.managemembers.index')->with('sucess', 'Membership deleted sucessfully!!');
     }
 }

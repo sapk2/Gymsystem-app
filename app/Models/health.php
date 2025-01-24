@@ -5,15 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class attendance extends Model
+class health extends Model
 {
     use HasFactory;
-    protected $fillable=[
+    protected $fillable = [
         'user_id',
-        'date',
-        'check_in',
-        'check_out',
-        'status',
+        'blood_group',
+        'height',
+        'weight',
+        'bmi',
+        'blood_pressure',
+        'heart_rate',
+        'body_fat_percentage',
+        'notes',
     ];
     public function user(){
         return $this->belongsTo(User::class);

@@ -46,7 +46,7 @@ class PlansController extends Controller
 
         Plan::create($data);
 
-        return redirect()->route('admin.plans.index')->with('success', 'Plan successfully created.');
+        return redirect()->route('admin.plans.index')->with('success', 'Plan  created successfully.!.');
     }
 
     /**
@@ -77,7 +77,7 @@ class PlansController extends Controller
 
         $plan->update($data);
 
-        return redirect()->route('admin.plans.index')->with('success', 'Plan updated successfully.');
+        return redirect()->route('admin.plans.index')->with('success', 'Plan updated successfully.!.');
     }
 
     /**

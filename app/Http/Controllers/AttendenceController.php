@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\attendance;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AttendenceController extends Controller
@@ -12,8 +13,8 @@ class AttendenceController extends Controller
      */
     public function index()
     {
-        $attendance=attendance::all();
-        return view('admin.attendances.index',compact('attendance'));
+        $attendance = attendance::all();
+        return view('admin.attendances.index', compact('attendance'));
     }
 
     /**
@@ -21,8 +22,8 @@ class AttendenceController extends Controller
      */
     public function create()
     {
-        return view('admin.attendance.create');
-
+        $user = User::where('roles', 'member')->get();
+        return view('admin.attendances.create', compact('user'));
     }
 
     /**
@@ -30,32 +31,31 @@ class AttendenceController extends Controller
      */
     public function store(Request $request)
     {
-        $data=$request->validate([
-            'user_id'=>'required',
-            'date'=>'required',
-            'check_in'=>'required',
-            'check_out'=>'required',
-            'status'=>'required'
+        $data = $request->validate([
+            'user_id' => 'required',
+            'date' => 'required',
+            'check_in' => 'required',
+            'check_out' => 'required',
+            'status' => 'required'
         ]);
         attendance::create($data);
-        return redirect()->route('admin.attendances.index')->with('sucess','data added sucessfully');
+        return redirect()->route('admin.attendances.index')->with('sucess', 'data added sucessfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        $attendance=attendance::findorfail($id);
-        return view('admin.attendances.index',compact('attendance'));
+        $attendance = attendance::findorfail($id);
+        $user = User::where('roles', 'member')->get();
+       // dd($user);
+        return view('admin.attendances.edit', compact('attendance', 'user'));
     }
 
     /**
@@ -63,16 +63,16 @@ class AttendenceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data=$request->validate([
-            'user_id'=>'required',
-            'date'=>'required',
-            'check_in'=>'required',
-            'check_out'=>'required',
-            'status'=>'required'
+        $data = $request->validate([
+            'user_id' => 'required',
+            'date' => 'required',
+            'check_in' => 'required',
+            'check_out' => 'required',
+            'status' => 'required'
         ]);
-        $attendance=attendance::findorfail($id);
+        $attendance = attendance::findorfail($id);
         $attendance->update($data);
-        return redirect()->route('admin.attendances.index')->with('sucess','sucessfully  update');
+        return redirect()->route('admin.attendances.index')->with('sucess', 'sucessfully  update');
     }
 
     /**
@@ -88,5 +88,4 @@ class AttendenceController extends Controller
             return redirect()->route('admin.attendances.index')->with('error', 'Deletion failed: ' . $e->getMessage());
         }
     }
-
 }

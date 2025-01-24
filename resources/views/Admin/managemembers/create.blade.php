@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900 dark:text-gray-100">
                <h1 class="text-2xl text-white px-2 py-2">Create </h1>
@@ -19,7 +19,7 @@
                                 <option value="{{$user->id}}">{{$user->name}} - {{$user->email}}</option>
                                 @endforeach
                             </select>
-                            @error('name')
+                            @error('user_id')
                                 <span class="text-red-500">{{$message}}</span>
                             @enderror
                         </div>
@@ -64,9 +64,13 @@
                             <input type="date" name="joining_date" class="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required />
                         </div>
                     </div>
-                    <div class="flex justify-center">
+                    <div>
+                        <label for="expirydate">Expiry Date:</label>
+                        <input type="date" name="expirydate" class="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required />
+                    </div>
+                    <div class="flex justify-center mt-6">
                         <input type="submit" value="submit" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-                        <a href="" class="bg-gray-500 hover:bg-gray-400 text-white ml-4 font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded" > back</a>
+                        <a href="{{route('admin.managemembers.index')}}" class="bg-gray-500 hover:bg-gray-400 text-white ml-4 font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded" >Back</a>
                     </div>
                 </form>
              </div>

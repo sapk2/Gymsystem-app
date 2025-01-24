@@ -39,7 +39,7 @@ class RoutineController extends Controller
             'end_time'=>'required',
         ]);
         routine::create($data);
-        return redirect()->route('admin.routines.index')->with('sucess','routine created sucessfully');
+        return redirect()->route('admin.routines.index')->with('sucess','Routine created sucessfully');
     }
 
     /**
@@ -86,6 +86,6 @@ class RoutineController extends Controller
     {
         $routine=routine::all();
         $routine->delete();
-        return redirect()->route('admin.routines.index')->with('sucess','data deleted sucessfully');
+        return redirect()->route('admin.routines.index')->with('sucess','Routine deleted sucessfully');
     }
 }

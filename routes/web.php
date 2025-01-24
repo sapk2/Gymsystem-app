@@ -3,11 +3,11 @@
 use App\Http\Controllers\AttendenceController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HealthController;
 use App\Http\Controllers\MembershipregisterCcontroller;
 use App\Http\Controllers\PlansController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoutineController;
-use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\Usercontroller;
 use App\Http\Middleware\admin;
@@ -44,6 +44,7 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin/managemembers/{id}/edit',[MembershipregisterCcontroller::class,'edit'])->name('admin.managemembers.edit');
     Route::post('/admin/managemembers/{id}/update',[MembershipregisterCcontroller::class,'update'])->name('admin.managemembers.update');
     Route::get('/admin/managemembers/{id}/delete',[MembershipregisterCcontroller::class,'delete'])->name('admin.managemembers.delete');
+    Route::get('/admin/managemembers/{id}/show',[MembershipregisterCcontroller::class,'show'])->name('admin.managemembers.show');
 
     /*************************************Manage trainer****************************************************************************************************************************************** */
     Route::get('/admin/managetrainers',[TrainerController::class,'index'])->name('admin.managetrainers.index');
@@ -69,6 +70,16 @@ Route::middleware('admin')->group(function () {
     Route::get('/attendances/{id}/edit',[AttendenceController::class,'edit'])->name('admin.attendances.edit');
     Route::post('/attendances/{id}/update',[AttendenceController::class,'update'])->name('admin.attendances.update');
     Route::get('/attendances/{id}/delete',[AttendenceController::class,'delete'])->name('admin.attendances.delete');
+    
+    /**********************************************Health status****************************************************************************************************************/
+
+    Route::get('/admin/health',[HealthController::class,'index'])->name('admin.healthstatus.index');
+    Route::get('/health-create',[HealthController::class,'create'])->name('admin.healthstatus.create');
+    Route::post('/health/store',[HealthController::class,'store'])->name('admin.healthstatus.store');
+    Route::get('/health/{id}/edit',[HealthController::class,'edit'])->name('admin.healthstatus.edit');
+    Route::post('/health/{id}/update',[HealthController::class,'update'])->name('admin.healthstatus.update');
+    Route::get('/health/{id}/delete',[HealthController::class,'delete'])->name('admin.healthstatus.delete');
+    Route::get('/health/{id}/show',[HealthController::class,'show'])->name('admin.healthstatus.show');
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

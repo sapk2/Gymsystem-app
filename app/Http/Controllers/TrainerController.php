@@ -39,7 +39,7 @@ class TrainerController extends Controller
             'phone_no'=>'required'
         ]);
         trainer::create($data);
-        return redirect()->route('admin.managetrainers.index')->with('sucess','data created sucessfully');
+        return redirect()->route('admin.managetrainers.index')->with('sucess','Data created sucessfully');
 
     }
 
@@ -73,7 +73,7 @@ class TrainerController extends Controller
         ]);
         $trainer=trainer::findorfail($id);
         $trainer->update($data);
-        return redirect()->route('admin.managetrainers.index')->with('sucess','sucessfully updated data');
+        return redirect()->route('admin.managetrainers.index')->with('sucess','Data updated sucessfully');
     }
 
     /**
@@ -83,6 +83,6 @@ class TrainerController extends Controller
     {
         $trainer=trainer::findorfail($id);
         $trainer->delete();
-        return redirect()->route('admin.managetrainers.index')->with('sucess','deleted sucessfully');
+        return redirect()->route('admin.managetrainers.index')->with('sucess','Data deleted sucessfully');
     }
 }

@@ -78,6 +78,6 @@ class Usercontroller extends Controller
     {
         $user = User::findorfail($id);
         $user->delete();
-        return view('admin.users.index', compact('user'))->with('sucess', 'delete sucessfully');
+        return redirect()->route('admin.users.index')->with('sucess', ' uses deleted sucessfully');
     }
 }
