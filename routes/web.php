@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HealthController;
 use App\Http\Controllers\MembershipregisterCcontroller;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PlansController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoutineController;
@@ -80,6 +81,16 @@ Route::middleware('admin')->group(function () {
     Route::post('/health/{id}/update',[HealthController::class,'update'])->name('admin.healthstatus.update');
     Route::get('/health/{id}/delete',[HealthController::class,'delete'])->name('admin.healthstatus.delete');
     Route::get('/health/{id}/show',[HealthController::class,'show'])->name('admin.healthstatus.show');
+
+/***********************************************Payment Management******************************************************************************************************************************************** */
+    Route::get('admin/payments',[PaymentController::class,'index'])->name('admin.payments.index');
+    Route::get('/payments-create',[PaymentController::class,'create'])->name('admin.payments.create');
+    Route::post('/payments/store',[PaymentController::class,'store'])->name('admin.payments.store');
+    Route::get('payments/{id}/show',[PaymentController::class,'show'])->name('admin.payments.show');
+    Route::get('/payments/{id}/edit',[PaymentController::class,'edit'])->name('admin.payments.edit');
+    Route::post('/payments/{id}/update',[PaymentController::class,'update'])->name('admin.payments.update');
+    Route::get('/payments/{id}/delete',[PaymentController::class,'delete'])->name('admin.payments.delete');
+
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

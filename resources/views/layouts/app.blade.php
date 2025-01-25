@@ -35,7 +35,7 @@
                 <li><a href="{{route('admin.routines.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Schedules</a></li>
                 <li><a href="{{route('admin.attendances.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Attendance</a></li>
                 <li><a href="{{route('admin.healthstatus.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Health status</a></li>
-                <li><a href="" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Payments</a></li>
+                <li><a href="{{route('admin.payments.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Payments</a></li>
                 <li><a href="{{route('admin.users.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Users</a></li>
                 <li>
                     <form action="{{ route('logout') }}" method="POST" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">
