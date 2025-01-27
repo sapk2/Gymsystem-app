@@ -57,7 +57,12 @@
                 <div class="flex justify-end">
                     <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" type="button">
                         <span class="sr-only">Open user menu</span>
+                        @if (Auth::user()->avatar)
+                            <img class="w-8 h-8 rounded-full" src="{{asset(Auth::user()->avatar)}}" alt="user img" srcset="">
+                        @else
                         <img class="w-8 h-8 rounded-full" src="{{asset('/img/profile.jpg')}}" alt="user photo">
+                        @endif
+                       
                     </button>
                     <!-- Dropdown menu -->
                     <div id="dropdownAvatar" class="z-10 hidden absolute right-0 mt-9 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">

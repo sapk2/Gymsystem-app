@@ -34,7 +34,13 @@ class AdminProfileController extends Controller
         }
 
           // Handle avatar upload
-    
+        if ($request->hasFile('avatar')) {
+            $avatarName =time().'.'.$request->avatar->extension();
+            $request->avatar->move(public_path('img'),$avatarName);
+            $path="/img/".$avatarName;
+            $user->avatar =$path;
+
+        }
 
      // Save the user data to the database
      $user->save();

@@ -92,13 +92,11 @@ Route::middleware('admin')->group(function () {
     Route::post('/payments/{id}/update',[PaymentController::class,'update'])->name('admin.payments.update');
     Route::get('/payments/{id}/delete',[PaymentController::class,'delete'])->name('admin.payments.delete');
 
-/*************************************adminprofile************************************************************************************************ */
+/*************************************Adminprofile************************************************************************************************ */
 Route::get('/admin/profile', [AdminProfileController::class, 'edit'])->name('admin.profile.edit');
 Route::post('/admin/profile', [AdminProfileController::class, 'update'])->name('admin.profile.update');
 Route::delete('/admin/profile', [AdminProfileController::class, 'destroy'])->name('admin.profile.destroy');
 
-Route::get('/admin/profile/reauth', [ProfileController::class, 'showReauthPage'])->name('admin.profile.reauth');
-Route::post('/admin/profile/reauth', [ProfileController::class, 'handleGoogleReauth'])->name('admin.profile.reauth.post');
 
 });
 

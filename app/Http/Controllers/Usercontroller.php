@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 
 class Usercontroller extends Controller
 {
@@ -29,12 +31,21 @@ class Usercontroller extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
+          $request->validate([
             'name' => 'required',
             'email' => 'required',
+            'password'=>Hash::make($request->password),
             'roles' => 'required'
         ]);
-        User::create($data);
+        $user=User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'roles' => $request->roles,
+   
+        ]);
+        $token =Password::createToken($user);
+        $user->sendpasswordresetnotification($token);
         return redirect()->route('admin.users.index')->with('sucess', 'users created sucessfully');
     }
 
@@ -63,9 +74,20 @@ class Usercontroller extends Controller
         $data = $request->validate([
             'name' => 'required',
             'email' => 'required',
-            'roles' => 'required'
+            'roles' => 'required',
+            'avatar'=>'nullable'
         ]);
         $user = User::findorfail($id);
+        if ($request->hasFile('avatar')) {
+            $avatarname= time() .'_'.$request->avatar->extension();
+            $request->avatar->move(public_path('img'),$avatarname);
+            $path="/img/".$avatarname;
+            $user->avatar =$path;
+        }
+        if($request->filled('password'))
+        {
+            $user->password =Hash::make($request->password);
+        }
         $user->update($data);
         $user->save();
         return redirect()->route('admin.users.index', compact('user'))->with('sucess', 'users updated sucessfully');

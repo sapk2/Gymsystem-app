@@ -19,7 +19,7 @@
             </div>
             <ul>
                 <li class="p-4 hover:bg-gray-700"><a href="#">Dashboard</a></li>
-                <li class="p-4 hover:bg-gray-700"><a href="#">Profile</a></li>
+                <li class="p-4 hover:bg-gray-700"><a href="#">Members</a></li>
                 <li class="p-4 hover:bg-gray-700"><a href="#">Sessions</a></li>
                 <li class="p-4 hover:bg-gray-700">
                     <form action="{{ route('logout') }}" method="POST" >
