@@ -100,4 +100,11 @@ class HealthController extends Controller
         $health->delete();
         return redirect()->route('admin.healthstatus.index')->with('sucess','Data deleted sucessfully!!');
     }
+
+
+    public function memberhealth(){
+        $health =health::all();
+        return view('trainers.memberhealth',compact('health'));
+    }
+
 }

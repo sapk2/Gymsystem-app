@@ -36,6 +36,11 @@
                             <span class="text-red-500">{{$message}}</span>
                         @enderror
                         </div>
+                    </div>
+                    <div>
+                        <label for="expirydate">Expiry Date:</label>
+                        <input type="date" name="end_at" class="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required />
+                    </div>
                         <div class="flex justify-center mt-6">
                             <input type="submit"class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" value="submit">
                             <a href="{{route('admin.managetrainers.index')}}" class="bg-gray-500 hover:bg-gray-400 text-white ml-4 font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded">Back</a>

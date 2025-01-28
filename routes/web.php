@@ -11,6 +11,7 @@ use App\Http\Controllers\PlansController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoutineController;
 use App\Http\Controllers\TrainerController;
+use App\Http\Controllers\TrainerScheduleController;
 use App\Http\Controllers\Usercontroller;
 use App\Http\Middleware\admin;
 use Illuminate\Support\Facades\Route;
@@ -107,7 +108,19 @@ Route::delete('/admin/profile', [AdminProfileController::class, 'destroy'])->nam
 Route::middleware('Trainer')->group(function () {
     Route::get('/trainers/dashboard', [DashboardController::class, 'trainerindex'])->name('trainers.dashboard');
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+/************************************************ Trainer-schedule ************************************************************************************************************* */
+    Route::get('/trainers/rouitnes',[TrainerScheduleController::class,'index'])->name('trainers.routines.index');
+    Route::post('/trainers/routines/store',[TrainerScheduleController::class,'store'])->name('trainers.routines.store');
+    Route::get('/trainers/{id}/edit',[TrainerScheduleController::class,'edit'])->name('trainers.routines.edit');
+    Route::post('/trainers/{id}/update',[TrainerScheduleController::class,'update'])->name('trainers.routines.update');
+    Route::get('/trainers/{id}/delete',[TrainerScheduleController::class,'delete'])->name('trainers.routines.delete');
+
+    Route::get('/trainers/membership',[TrainerController::class,'trainershow'])->name('trainers.membership.index');
+    Route::get('/trainers/memberhealth',[HealthController::class,'memberhealth'])->name('trainers.memberhealth');
+
+
+
+Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });

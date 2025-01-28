@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\trainer;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TrainerController extends Controller
 {
@@ -15,8 +16,8 @@ class TrainerController extends Controller
      */
     public function index()
     {
-        $trainer=trainer::all();
-        return view('admin.managetrainers.index',compact('trainer'));
+        $trainer = trainer::all();
+        return view('admin.managetrainers.index', compact('trainer'));
     }
 
     /**
@@ -24,8 +25,8 @@ class TrainerController extends Controller
      */
     public function create()
     {
-        $user =User::where('roles','trainer')->get();
-        return view('admin.managetrainers.create',compact('user'));
+        $user = User::where('roles', 'trainer')->get();
+        return view('admin.managetrainers.create', compact('user'));
     }
 
     /**
@@ -33,14 +34,15 @@ class TrainerController extends Controller
      */
     public function store(Request $request)
     {
-        $data =$request->validate([
-            'user_id'=>'required|unique:trainers,user_id',
-            'specialization'=>'required',
-            'phone_no'=>'required'
+        $data = $request->validate([
+            'user_id' => 'required|unique:trainers,user_id',
+            'specialization' => 'required',
+            'phone_no' => 'required',
+            'end_at' => 'required'
+
         ]);
         trainer::create($data);
-        return redirect()->route('admin.managetrainers.index')->with('sucess','Data created sucessfully');
-
+        return redirect()->route('admin.managetrainers.index')->with('sucess', 'Data created sucessfully');
     }
 
     /**
@@ -56,9 +58,9 @@ class TrainerController extends Controller
      */
     public function edit(string $id)
     {
-        $user=User::where('roles','trainer')->get();
-        $trainer =trainer::findorfail($id);
-        return view('admin.managetrainers.edit',compact('trainer','user'));
+        $user = User::where('roles', 'trainer')->get();
+        $trainer = trainer::findorfail($id);
+        return view('admin.managetrainers.edit', compact('trainer', 'user'));
     }
 
     /**
@@ -66,14 +68,15 @@ class TrainerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data =$request->validate([
-            'user_id'=>'required',
-            'specialization'=>'required',
-            'phone_no'=>'required'
+        $data = $request->validate([
+            'user_id' => 'required',
+            'specialization' => 'required',
+            'phone_no' => 'required',
+            'end_at' => 'required'
         ]);
-        $trainer=trainer::findorfail($id);
+        $trainer = trainer::findorfail($id);
         $trainer->update($data);
-        return redirect()->route('admin.managetrainers.index')->with('sucess','Data updated sucessfully');
+        return redirect()->route('admin.managetrainers.index')->with('sucess', 'Data updated sucessfully');
     }
 
     /**
@@ -81,8 +84,14 @@ class TrainerController extends Controller
      */
     public function delete(string $id)
     {
-        $trainer=trainer::findorfail($id);
+        $trainer = trainer::findorfail($id);
         $trainer->delete();
-        return redirect()->route('admin.managetrainers.index')->with('sucess','Data deleted sucessfully');
+        return redirect()->route('admin.managetrainers.index')->with('sucess', 'Data deleted sucessfully');
+    }
+
+    public function trainershow()
+    {
+        $trainer = trainer::where('user_id', Auth::id())->get();
+        return view('trainers.membership.index', compact('trainer'));
     }
 }

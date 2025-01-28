@@ -12,6 +12,8 @@ class trainer extends Model
         'user_id',
         'specialization',
         'phone_no',
+        'end_at'
+
     ];
     public function user(){
         return $this->belongsTo(User::class);
