@@ -31,7 +31,6 @@
                 <li><a href="{{route('trainers.dashboard')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Dashboard</a></li>
                 <li><a href="{{route('trainers.membership.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Membership</a></li>
                 <li><a href="{{route('trainers.routines.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Schedules</a></li>
-                <li><a href="" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Attendance</a></li>
                 <li><a href="{{route('trainers.memberhealth')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Member's Health</a></li>
                 <li>
                     <form action="{{ route('logout') }}" method="POST" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">
@@ -71,7 +70,7 @@
                                 <a href="{{route('trainers.dashboard')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
                             </li>
                             <li>
-                                <a href="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">profile</a>
+                                <a href="{{route('trainers.profile.edit')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">profile</a>
                             </li>
                         </ul>
                         <div class="py-2">

@@ -11,24 +11,24 @@
                 </div>
                
                <div class="relative">
-                <table id="mytable"  class="display table-auto w-full border-collapse border border-gray-300">
-                    <thead class="border border-gray-300 bg-slate-500">
+                <table id="mytable" >
+                    <thead>
                         <tr>
-                            <th  class="border border-gray-300">SN</th>
-                            <th  class="border border-gray-300">Name</th>
-                            <th  class="border border-gray-300">Notes</th>
-                            <th  class="border border-gray-300">Records</th>
-                            <th  class="border border-gray-300">Action</th>
+                            <th>SN</th>
+                            <th>Name</th>
+                            <th>Notes</th>
+                            <th>Records</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($health as $item)
                         <tr>
-                            <td class="border border-gray-300">{{$loop->index +1}}</td>
-                            <td class="border border-gray-300">{{$item->user->name}}</td>
-                            <td class="border border-gray-300">{{$item->notes}}</td>
-                            <td class="border border-gray-300"><a href="{{route('admin.healthstatus.show',$item->id)}}" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Details</a></td>
-                            <td class="px-2 py-3 flex justify-center space-x-1">
+                            <td>{{$loop->index +1}}</td>
+                            <td>{{$item->user->name}}</td>
+                            <td>{{$item->notes}}</td>
+                            <td><a href="{{route('admin.healthstatus.show',$item->id)}}" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Details</a></td>
+                            <td class="mt-2 flex justify-center space-x-1">
                                 <a href="{{route('admin.healthstatus.edit',$item->id)}}" class="bg-sky-500 text-white px-4 py-2 rounded-xl hover:bg-sky-600">Edit</a>
                                 <form action="{{route('admin.healthstatus.delete',$item->id)}}" method="get">
                                     @csrf

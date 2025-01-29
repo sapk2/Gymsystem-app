@@ -8,7 +8,7 @@ use App\Http\Controllers\HealthController;
 use App\Http\Controllers\MembershipregisterCcontroller;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PlansController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TrainerProfileController;
 use App\Http\Controllers\RoutineController;
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\TrainerScheduleController;
@@ -120,9 +120,9 @@ Route::middleware('Trainer')->group(function () {
 
 
 
-Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::get('/trainers/profile', [TrainerProfileController::class, 'edit'])->name('trainers.profile.edit');
+    Route::post('/trainers/profile', [TrainerProfileController::class, 'update'])->name('trainers.profile.update');
+    Route::delete('/trainers/profile', [TrainerProfileController::class, 'destroy'])->name('trainers.profile.destroy');
 });
 
 Route::group(['middleware'=>['auth','member']],function(){

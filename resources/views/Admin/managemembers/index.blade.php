@@ -11,25 +11,25 @@
                 </div>
                 <hr class="border border-green-200">
                 <div class="container mt-6">
-                    <table id="mytable" class="display table-auto w-full border-collapse border border-gray-300">
+                    <table id="mytable">
                         <thead>
-                            <tr class="bg-gray-200 dark:bg-gray-700">
-                                <th class="px-4 py-2 border border-gray-300">SN</th>
-                                <th class="px-4 py-2 border border-gray-300">user</th>
-                                <th class="px-4 py-2 border border-gray-300">city</th>
-                                <th class="px-4 py-2 border border-gray-300">Email</th>
-                                <th class="px-4 py-2 border border-gray-300">Actions</th>
+                            <tr>
+                                <th>SN</th>
+                                <th>user</th>
+                                <th>city</th>
+                                <th>Email</th>
+                                <th>Actions</th>
 
                             </tr>
                         </thead>
                         <tbody>
                           @foreach ($mem as $mem)
                               <tr>
-                                <td class="border px-2 py-4">{{$loop-> index+1}}</td>
-                                <td class="border px-2 py-4">{{$mem->user->name }}</td>
-                                <td class="border px-2 py-4">{{$mem->city_name}}</td>
-                                <td class="border px-2 py-4">{{$mem->user->email}}</td>
-                                <td class="border px-2 py-4 flex space-x-1 ">
+                                <td>{{$loop-> index+1}}</td>
+                                <td>{{$mem->user->name }}</td>
+                                <td>{{$mem->city_name}}</td>
+                                <td>{{$mem->user->email}}</td>
+                                <td class="flex space-x-1 ">
                                     <a href="{{route('admin.managemembers.show',$mem->id)}}" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Details</a>
                                     <a href="{{route('admin.managemembers.edit',$mem->id)}}" class="bg-sky-500 text-white px-4 py-2 rounded-md hover:bg-sky-600">edit</a>
                                     <a href="{{route('admin.managemembers.delete',$mem->id)}}" class="bg-red-600 text-white px-4 py-2  rounded-lg" onclick="return confirm('Are you sure?')">Delete</a>

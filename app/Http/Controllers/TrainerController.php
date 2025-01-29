@@ -94,4 +94,6 @@ class TrainerController extends Controller
         $trainer = trainer::where('user_id', Auth::id())->get();
         return view('trainers.membership.index', compact('trainer'));
     }
+
+
 }

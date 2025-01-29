@@ -11,24 +11,24 @@
                 </div>
                 <hr class="border border-green-200">
                 <div class="container mt-6">
-                    <table id="mytable" class="display table-auto w-full border-collapse border border-gray-300">
+                    <table id="mytable">
                         <thead>
-                            <tr class="bg-gray-200 dark:bg-gray-700">
-                                <th class="px-4 py-2 border border-gray-300">SN</th>
-                                <th class="px-4 py-2 border border-gray-300">Name</th>
-                                <th class="px-4 py-2 border border-gray-300">Email</th>
-                                <th class="px-4 py-2 border border-gray-300">Roles</th>
-                                <th class="px-4 py-2 border border-gray-300">Actions</th>
+                            <tr>
+                                <th>SN</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Roles</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                           @foreach ($user as $user)
                               <tr>
-                                <td class="border px-2 py-4">{{$loop-> index+1}}</td>
-                                <td class="border px-2 py-4">{{$user->name}}</td>
-                                <td class="border px-2 py-4">{{$user->email}}</td>
-                                <td class="border px-2 py-4">{{$user->roles}}</td>
-                                <td class="border px-2 py-4 flex space-x-2 ">
+                                <td>{{$loop-> index+1}}</td>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->email}}</td>
+                                <td>{{$user->roles}}</td>
+                                <td class="flex space-x-2 ">
                                     <a href="{{route('admin.users.edit',$user->id)}}"class="bg-sky-500 text-white px-4 py-2 rounded-md hover:bg-sky-600">edit</a>
                                     <a href="{{route('admin.users.delete',$user->id)}}" onclick="return confirm('Are you sure?')" class="bg-red-600 text-white px-4 py-2  rounded-lg">Delete</a>
                                 </td>

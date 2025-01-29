@@ -10,28 +10,28 @@
                 </div>
                 <hr>
                 <div class=" container mt-6">
-                    <table id="mytable" class="w-full text-base text-left rtl:text-right text-gray-100 dark:text-gray-100">
-                        <thead class="text-xs text-white uppercase bg-gray-50 dark:bg-gray-700 dark:text-white">
+                    <table id="mytable">
+                        <thead>
                             <tr>
-                                <th class="px-6 py-3 border border-gray-300 text-center">SN</th>
-                                <th class="px-6 py-3 border border-gray-300 text-center">Member name</th>
-                                <th class="px-6 py-3 border border-gray-300 text-center">Date</th>
-                                <th class="px-6 py-3 border border-gray-300 text-center">Check-In</th>
-                                <th class="px-6 py-3 border border-gray-300 text-center">Check-Out</th>
-                                <th class="px-6 py-3 border border-gray-300 text-center">Status</th>
-                                <th class="px-6 py-3 border border-gray-300 text-center">Action</th>
+                                <th>SN</th>
+                                <th>Member name</th>
+                                <th>Date</th>
+                                <th>Check-In</th>
+                                <th>Check-Out</th>
+                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($attendance as $attendance)
                                 <tr>
-                                    <td class="border px-2 py-4">{{$loop->index + 1}}</td>
-                                    <td class="border px-2 py-4">{{$attendance->user->name}}</td>
-                                    <td class="border px-2 py-4">{{$attendance->date}}</td>
-                                    <td class="border px-2 py-4">{{$attendance->check_in}}</td>
-                                    <td class="border px-2 py-4">{{$attendance->check_out}}</td>
-                                    <td class="border px-2 py-4">{{$attendance->status}}</td>
-                                    <td class=" px-2 py-4 flex mt-2 space-x-2 ">
+                                    <td>{{$loop->index + 1}}</td>
+                                    <td>{{$attendance->user->name}}</td>
+                                    <td>{{$attendance->date}}</td>
+                                    <td>{{$attendance->check_in}}</td>
+                                    <td>{{$attendance->check_out}}</td>
+                                    <td>{{$attendance->status}}</td>
+                                    <td class="flex mt-2 space-x-2 ">
                                         <a href="{{route('admin.attendances.edit',$attendance->id)}}" class="bg-sky-500 text-white px-4 py-2 rounded-xl hover:bg-sky-600" >Edit</a>
                                         <form action="{{route('admin.attendances.delete',$attendance->id)}}" method="get" class="inline-block">
                                             @csrf
