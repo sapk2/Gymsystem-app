@@ -25,7 +25,7 @@
                           @foreach ($mem as $mem)
                               <tr>
                                 <td class="border px-2 py-4">{{$loop-> index+1}}</td>
-                                <td class="border px-2 py-4">{{$mem->plan->plan_id }}</td>
+                                <td class="border px-2 py-4">{{$mem->plan->name }}</td>
                                 <td class="border px-2 py-4">{{$mem->gender}}</td>
                                 <td class="border px-2 py-4">{{$mem->dob}}</td>
                                 <td class="border px-2 py-4">{{$mem->phone_no}}</td>

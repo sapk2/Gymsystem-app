@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\routine;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RoutineController extends Controller
 {
@@ -87,5 +88,12 @@ class RoutineController extends Controller
         $routine=routine::all();
         $routine->delete();
         return redirect()->route('admin.routines.index')->with('sucess','Routine deleted sucessfully');
+    }
+
+/*******************************Memeber dashboard********************************************************************************************* */
+    public function memberindex(){
+        $routine=routine::all();
+
+        return view('members.routine.memberindex',compact('routine'));
     }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\member;
 use App\Models\Plan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class PlansController extends Controller
@@ -89,5 +91,11 @@ class PlansController extends Controller
         $plan->delete();
 
         return redirect()->route('admin.plans.index')->with('success', 'Plan deleted successfully.');
+    }
+
+    public function memberplan(){
+        $member =member::where('user_id', Auth::id())->get();
+      // dd($member);
+        return view('members.subscribedplan',compact('member'));
     }
 }

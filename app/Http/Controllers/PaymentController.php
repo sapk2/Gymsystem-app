@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\payment;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -79,6 +78,13 @@ class PaymentController extends Controller
         payment::findorfail($id)->update($data);
         return redirect()->route('admin.payments.index')->with('sucess','Payment has been updated sucessfully');
     }
+    public function userupdate(Request $request, Payment $payment)
+{ 
+    $request->validate(['status' => 'required|string']);
+    $payment->update(['status' => $request->status]);
+    return back()->with('success', 'Payment status updated.');
+}
+
 
     /**
      * Remove the specified resource from storage.
@@ -89,4 +95,5 @@ class PaymentController extends Controller
         $payment->delete();
         return redirect()->route('admin.payments.index')->with('sucess','Payment has been deleted sucessfully ');
     }
+ 
 }

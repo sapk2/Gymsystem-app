@@ -13,7 +13,7 @@
                 </div>
                 <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md">
                     <p class="text-lg font-semibold">Amount</p>
-                    <p class="text-gray-900 dark:text-gray-100">${{$payments->amount}}</p>
+                    <p class="text-gray-900 dark:text-gray-100">RS.{{$payments->amount}}</p>
                 </div>
                 <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md">
                     <p class="text-lg font-semibold">Payment Method</p>
