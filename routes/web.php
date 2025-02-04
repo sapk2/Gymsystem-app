@@ -128,10 +128,11 @@ Route::middleware('Trainer')->group(function () {
 Route::group(['middleware' => ['auth', 'member']], function () {
     Route::get('/members/dashboard', [DashboardController::class, 'memberindex'])->name('members.dashboard');
 
-
+    
     Route::get('/members/payments', [UserPaymentController::class, 'index'])->name('members.payments.index');
     Route::get('/members/payments-create', [UserPaymentController::class, 'create'])->name('members.payments.create');
     Route::post('/members/payments/store', [UserPaymentController::class, 'store'])->name('members.payments.store');
+ //   Route::get('/members/payments/verify', [UserPaymentController::class, 'verify']) ->name('members.payments.verify');
 
 
     Route::get('/members/profile', [UserProfileController::class, 'edit'])->name('members.profile.edit');

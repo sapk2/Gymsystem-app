@@ -43,6 +43,4 @@ class UserPaymentController extends Controller
         payment::create($data);
         return redirect()->route('members.payments.index')->with('sucess', 'Payment has been created sucessfully');
     }
-
-  
 }

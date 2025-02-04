@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\attendance;
+use App\Models\health;
 use App\Models\member;
 use App\Models\payment;
 use App\Models\plan;
@@ -60,11 +61,19 @@ class DashboardController extends Controller
      */
     public function memberindex()
     {
-        $plan=plan::all();
-        //dd($plan);
-        return view('members.dashboard',compact('plan'));
+        $user = Auth::user();
+        
+        return view('members.dashboard', [
+            'plan' => Plan::all(),
+            'health' => Health::where('user_id', $user->id)
+                            ->latest()
+                            ->get(),
+            'latestHealth' => Health::where('user_id', $user->id)
+                                 ->latest()
+                                 ->first(),
+            'user' => $user
+        ]);
     }
-
 
     /**
      * Display the specified resource.

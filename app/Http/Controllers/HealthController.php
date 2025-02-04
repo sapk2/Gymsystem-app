@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\health;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HealthController extends Controller
 {
@@ -106,5 +107,7 @@ class HealthController extends Controller
         $health =health::all();
         return view('trainers.memberhealth',compact('health'));
     }
+
+
 
 }
