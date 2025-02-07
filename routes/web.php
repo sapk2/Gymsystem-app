@@ -5,6 +5,7 @@ use App\Http\Controllers\AttendenceController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HealthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MembershipregisterCcontroller;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PlansController;
@@ -18,11 +19,12 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Middleware\admin;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[HomeController::class,'index'] )->name('welcome');
+/*****************************************************google auth *********************************************************/
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 Route::get('auth/google', [GoogleController::class, 'redirectTOGoogle'])->name('redirect.google');
+
+/*****************************Admin panel ******************************************************************************************** */
 Route::middleware('admin')->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'adminindex'])->name('admin.dashboard');
 
