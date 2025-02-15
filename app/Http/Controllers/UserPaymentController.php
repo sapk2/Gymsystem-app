@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Payment;
 use App\Models\Plan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class UserPaymentController extends Controller
@@ -52,7 +54,7 @@ class UserPaymentController extends Controller
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => env('KHALTI_URL'),
+            CURLOPT_URL => 'https://dev.khalti.com/api/v2/epayment/initiate/',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -91,8 +93,10 @@ class UserPaymentController extends Controller
 
     public function verify(Request $request)
     {
+        //Log::info('Verify Request Data:', $request->all());
         $pidx = $request->query('pidx');
         
+
         if (!$pidx) {
             return redirect()->route('members.payments.index')->with('error', 'Invalid transaction.');
         }
@@ -118,7 +122,7 @@ class UserPaymentController extends Controller
                 case 'Completed':
                     Payment::create([
                         'user_id' => Auth::id(),
-                        'payment_date' => now(),
+                        'payment_date' => Carbon::now(),
                         'amount' => $responseBody['total_amount'] / 100,
                         'payment_method' => 'Khalti',
                         'transaction_id' => $pidx,
