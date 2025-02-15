@@ -29,7 +29,7 @@
                                     <td >{{$loop->index+1}}</td>
                                     <td >{{$plan->plan_id}}</td>
                                     <td >{{$plan->name}}</td>
-                                    <td >{{$plan->description}}</td>
+                                    <td >{{strip_tags($plan->description)}}</td>
                                     <td >{{$plan->validity}}</td> 
                                     <td >RS.{{$plan->amount}}</td>
                                     <td class=" flex space-x-1">

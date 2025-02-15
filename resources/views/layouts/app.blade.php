@@ -16,7 +16,9 @@
     <!-- JS Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.min.js"></script>
-
+    <!-- text editor quill.js"-->
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
     <!-- Vite -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -76,6 +78,31 @@
                             </li>
                             <li>
                                 <a href="{{route('admin.profile.edit')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">profile</a>
+                            </li>
+                            <li x-data="{ open: false }" class="relative">
+                                <!-- Button to toggle dropdown -->
+                                <button @click="open = !open" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">
+                                    Settings
+                                </button>
+                            
+                                <!-- Dropdown Menu -->
+                                <div x-show="open" @click.away="open = false" class="mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+                                        <li>
+                                            <a href="{{route('admin.aboutus.index')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">About Us</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{route('admin.contacts.index')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Feedbacks</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{route('admin.footer.index')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">footers</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            
+                            <li>
+                                <a href="{{route('admin.herofeature.index')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Details</a>
                             </li>
                         </ul>
                         <div class="py-2">
@@ -185,6 +212,7 @@
 });
 
     </script>
+    
 </body>
 
 </html>

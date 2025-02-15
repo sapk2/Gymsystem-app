@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\payment;
+use App\Models\plan;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -22,6 +23,7 @@ class PaymentController extends Controller
     public function create()
     {
         $user=User::where('roles','member')->get();
+        
         return view('admin.payments.create',compact('user'));
     }
 

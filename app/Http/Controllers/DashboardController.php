@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\attendance;
+use App\Models\contact;
 use App\Models\health;
 use App\Models\member;
 use App\Models\payment;
@@ -23,7 +24,8 @@ class DashboardController extends Controller
         $attendances = Attendance::count();
         $member = Member::count();
         $payment = Payment::count();
-
+        $contacts=contact::count();
+      //  dd($contacts);
         // Get user login count per month
         $monthlyLogins = User::selectRaw('MONTH(created_at) as month, COUNT(id) as count')
             ->whereYear('created_at', date('Y')) // Filter by current year
@@ -41,7 +43,8 @@ class DashboardController extends Controller
             'attendances',
             'member',
             'payment',
-            'loginCounts'
+            'loginCounts',
+            'contacts'
         ));
     }
 

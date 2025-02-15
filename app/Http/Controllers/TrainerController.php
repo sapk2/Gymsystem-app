@@ -6,6 +6,7 @@ use App\Models\trainer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class TrainerController extends Controller
 {
@@ -38,9 +39,14 @@ class TrainerController extends Controller
             'user_id' => 'required|unique:trainers,user_id',
             'specialization' => 'required',
             'phone_no' => 'required',
-            'end_at' => 'required'
+            'end_at' => 'required',
+            'image' => 'nullable'
 
         ]);
+        if ($request->hasFile('image')) {
+            $imagepath=$request->file('image')->store('trainer','public');
+            $data['image']=$imagepath;
+        }
         trainer::create($data);
         return redirect()->route('admin.managetrainers.index')->with('sucess', 'Data created sucessfully');
     }
@@ -72,9 +78,17 @@ class TrainerController extends Controller
             'user_id' => 'required',
             'specialization' => 'required',
             'phone_no' => 'required',
-            'end_at' => 'required'
+            'end_at' => 'required',
+            'image'=>'nullable'
         ]);
         $trainer = trainer::findorfail($id);
+        if ($request->hasFile('image')) {
+            if ($trainer->image) {
+                storage::disk('public')->delete($trainer->image);
+            }
+            $imagepath=$request->file('image')->store('trainer','public');
+            $data['image'] = $imagepath;
+        }
         $trainer->update($data);
         return redirect()->route('admin.managetrainers.index')->with('sucess', 'Data updated sucessfully');
     }

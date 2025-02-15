@@ -34,10 +34,13 @@
                                 <div>
                                     <label for="day_of_week"  class="block mb-2 text-base font-semibold text-gray-900 dark:text-white">Days</label>
                                     <select name="day_of_week" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
-                                        @foreach (['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] as $day)                           <option value="{{ $day }}">{{ $day }}</option>
-                                            <option value="{{$day}}"{{old('day_of_week', $routine->day_of_week)}} >{{$day}}</option>
+                                        @foreach (['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] as $day)                          
+                                            <option value="{{$day}}">{{$day}}</option>
                                         @endforeach
                                     </select>
+                                    @error('day_of_week')
+                                        <span class="text-red-500">{{$message}}</span>
+                                    @enderror
                                 </div>
                                <div>
                                 <label for="start_time"  class="block mb-2 text-base font-semibold text-gray-900 dark:text-white">start time</label>

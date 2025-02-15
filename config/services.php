@@ -40,8 +40,10 @@ return [
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => env('GOOGLE_REDIRECT'),
     ],
-   /* 'khalti' => [
-       'secret_key' => env('KHALTI_SECRET_KEY'),
-    ],*/
+    'khalti' => [
+       'secret_key' => env('KHALTI_LIVE_KEY'),
+       'public_key'=>env('KHALTI_LIVE_PUBLIC_KEY'),
+       'url'=>env('KHALTI_URL')
+    ],
 
 ];

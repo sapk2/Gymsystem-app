@@ -45,6 +45,7 @@ class PlansController extends Controller
         } while (Plan::where('plan_id', $data['plan_id'])->exists());
 
         $data['amount'] = $data['validity'] * $data['rate'];
+        $data['description'] = strip_tags($request->description);
 
         Plan::create($data);
 
@@ -76,6 +77,7 @@ class PlansController extends Controller
 
         // Recalculate amount
         $data['amount'] = $data['validity'] * $data['rate'];
+        $data['description'] = strip_tags($request->description);
 
         $plan->update($data);
 

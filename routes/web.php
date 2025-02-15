@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\AttendenceController;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FooterController;
+use App\Http\Controllers\FrontedController;
 use App\Http\Controllers\HealthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MembershipregisterCcontroller;
@@ -16,10 +20,27 @@ use App\Http\Controllers\TrainerScheduleController;
 use App\Http\Controllers\Usercontroller;
 use App\Http\Controllers\UserPaymentController;
 use App\Http\Controllers\UserProfileController;
-use App\Http\Middleware\admin;
+use App\Models\Footer;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/',[HomeController::class,'index'] )->name('welcome');
+
+Route::get('/aboutus',[HomeController::class,'aboutus'])->name('partials.about');
+Route::get('/herofeature',[Homecontroller::class,'herofeature'])->name('partials.hero');
+
+Route::get('/subscription',[HomeController::class,'index'])->name('partials.subscription');
+
+Route::get('/contact', [HomeController::class, 'contact'])->name('partials.contact');
+Route::post('/contact/store', [ContactController::class, 'store'])->name('contact.store');
+
+Route::get('/footer',[HomeController::class,'footer']);
+
+
+
+
+
+
 /*****************************************************google auth *********************************************************/
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 Route::get('auth/google', [GoogleController::class, 'redirectTOGoogle'])->name('redirect.google');
@@ -97,6 +118,22 @@ Route::middleware('admin')->group(function () {
     Route::post('/payments/{id}/update', [PaymentController::class, 'update'])->name('admin.payments.update');
     Route::get('/payments/{id}/delete', [PaymentController::class, 'delete'])->name('admin.payments.delete');
 
+
+    /*************************Aboutus********************************** */
+    Route::get('/admin/about',[AboutUsController::class,'index'])->name('admin.aboutus.index');
+    Route::post('/admin/about',[AboutUsController::class,'update'])->name('admin.aboutus.update');
+
+   /******************************footer ************************************************************************************ */
+    Route::get('/admin/footer',[FooterController::class,'index'])->name('admin.footer.index');
+    Route::post('/admin/footer',[FooterController::class,'update'])->name('admin.footer.update');
+    /*******************************contact -message******************************************************************************* */
+    Route::get('/admin/contact', [ContactController::class, 'show'])->name('admin.contacts.index');
+    Route::get('/admin/contact/{id}/reply', [ContactController::class, 'reply'])->name('admin.contacts.reply');
+    Route::get('/admin/contact/{id}', [ContactController::class, 'destroy'])->name('admin.contacts.destroy');
+    Route::post('/admin/contact/send',[ContactController::class,'sendreply'])->name('admin.contacts.reply.send');
+    /********************************************fronted  **********************************************************************************************/
+    Route::get('/admin/herofeature',[FrontedController::class,'index'])->name('admin.herofeature.index');
+    Route::post('/admin/herofeature',[FrontedController::class,'update'])->name('admin.herofeature.update');
     /*************************************Adminprofile************************************************************************************************ */
     Route::get('/admin/profile', [AdminProfileController::class, 'edit'])->name('admin.profile.edit');
     Route::post('/admin/profile', [AdminProfileController::class, 'update'])->name('admin.profile.update');
@@ -135,7 +172,8 @@ Route::group(['middleware' => ['auth', 'member']], function () {
     Route::get('/members/payments-create', [UserPaymentController::class, 'create'])->name('members.payments.create');
     Route::post('/members/payments/store', [UserPaymentController::class, 'store'])->name('members.payments.store');
  //   Route::get('/members/payments/verify', [UserPaymentController::class, 'verify']) ->name('members.payments.verify');
-
+ Route::post('/payments/initiate', [UserPaymentController::class, 'initiate'])->name('members.payment.initiate');
+    Route::get('/payments/success', [UserPaymentController::class, 'verify'])->name('members.payment.success');
 
     Route::get('/members/profile', [UserProfileController::class, 'edit'])->name('members.profile.edit');
     Route::post('/members/profile', [UserProfileController::class, 'update'])->name('members.profile.update');

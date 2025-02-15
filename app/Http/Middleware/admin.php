@@ -16,12 +16,16 @@ class admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() ) {
-            if (Auth::user()->roles=='admin') {
+        
+        if (Auth::check()) {
+            // Check if authenticated user is an admin
+            if (Auth::user()->roles == 'admin') {
                 return $next($request);
             }
-            return redirect()->route('login');
+            // Redirect to home if user is not an admin
+            return redirect()->route('welcome');
         }
-      
+        // Redirect to login if user is not authenticated
+        return redirect()->route('login');
     }
 }

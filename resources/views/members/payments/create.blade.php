@@ -1,62 +1,58 @@
 @extends('layouts.member-app')
 @section('content')
 <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900 dark:text-gray-100">
-                <div class="bg-gray-700 p-4 rounded-md mb-4 flex justify-between items-center">
-                    <h1 class="text-2xl font-semibold text-white">Add Payment</h1>
-                    <hr>
-                   
+    <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden">
+            <div class="p-6">
+                <div class="bg-gradient-to-r from-blue-600 to-blue-400 p-4 rounded-t-lg text-white flex justify-between items-center">
+                    <h1 class="text-xl font-semibold">Add Payment</h1>
                 </div>
-                <hr class="border border-green-200">
-                <div class="container mt-6">
-                    <form action="{{route('members.payments.store')}}" method="POST" enctype="multipart/form-data">
+                <div class="p-6">
+                    <form action="{{route('members.payments.initiate')}}" method="POST" enctype="multipart/form-data" class="space-y-6">
                         @csrf
-                        <div class="grid gap-6 mb-6 md:grid-cols-2" >
-                            <div class="mb-4">
-                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Member Name </label>
-                                <input type="text" value="{{ $user->name }}" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 cursor-not-allowed"readonly>
+                        <div class="grid gap-6 md:grid-cols-2">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Member Name</label>
+                                <input type="text" value="{{ $user->name }}" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 cursor-not-allowed" readonly>
                                 <input type="hidden" name="user_id" value="{{ $user->id }}">
                             </div>
-                            <div class="mb-4">
-                                <label for="payment_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Payment Date</label>   
-                                <input type="date" name="payment_date" id="payment_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                @error('payment_date')
-                                    <span class="text-red-500 text-base">{{$message}}</span>
-                                @enderror
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Plan</label>
+                                <select name="plan" id="plan" class="w-full p-2.5 border border-gray-300 rounded-lg text-gray-900 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                    @foreach ($plan as $plan)
+                                        <option value="{{$plan->id}}" 
+                                            data-price="{{$plan->amount}}" >{{$plan->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <div class="mb-4">
-                                <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
-                                <input type="number" name="amount" id="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                @error('amount')
-                                    <span class="text-red-500 text-base">{{$message}}</span>
+                            <div>
+                                <label for="payment_date" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Payment Date</label>
+                                <input type="date" name="payment_date" id="payment_date" class="w-full p-2.5 border border-gray-300 rounded-lg text-gray-900 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                @error('payment_date')
+                                    <span class="text-red-500 text-sm">{{$message}}</span>
                                 @enderror
                             </div>
                             <div>
-                                <label for="payment_method" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Payment Method</label>
-                                <select name="payment_method" id="payment_method" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option value="Cash">Cash</option>
-                                    <option value="Bank">Bank</option>
-                                    <option value="Cheque">Cheque</option>
-                                </select>
-                                @error('payment_method')
-                                    <span class="text-red-500 text-base">{{$message}}</span>
+                                <label for="amount" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Amount</label>
+                                <input type="number" name="amount" id="amount" class="w-full p-2.5 border border-gray-300 rounded-lg text-gray-900 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white" readonly>
+                                @error('amount')
+                                    <span class="text-red-500 text-sm">{{$message}}</span>
                                 @enderror
                             </div>
-                            
-                                <div class="mb-4">
-                                <label for="transaction_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Transaction ID</label>
-                                <input type="text" name="transaction_id" id="transaction_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <div>
+                                <input type="hidden" name="payment_method" value="khalti">
+                            </div>
+                            <div>
+                                <label for="transaction_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Transaction ID</label>
+                                <input type="text" name="transaction_id" id="transaction_id" class="w-full p-2.5 border border-gray-300 rounded-lg text-gray-900 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 @error('transaction_id')
-                                    <span class="text-red-500 text-base">{{$message}}</span>
+                                    <span class="text-red-500 text-sm">{{$message}}</span>
                                 @enderror
                             </div>
                         </div>
-                        <div class="flex justify-center">
-                            <input type="submit" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-                            
-                            <a href="{{route('members.payments.index')}}" class="bg-gray-500 hover:bg-gray-400 text-white ml-4 font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded">Back</a>
+                        <div class="flex justify-center space-x-4">
+                            <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-6 rounded-lg shadow-md">proceed to payment</button>
+                            <a href="{{route('members.dashboard')}}" class="bg-gray-500 hover:bg-gray-400 text-white font-bold py-2 px-6 rounded-lg shadow-md">Back</a>
                         </div>
                     </form>
                 </div>
@@ -64,5 +60,12 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function(){
+            $('#plan').change(function() {
+                var price = $(this).find(':selected').data('price'); // Get selected plan price
+                $('#amount').val(price ? price : ''); // Update amount field
+            });
+        });
+</script>
 @endsection

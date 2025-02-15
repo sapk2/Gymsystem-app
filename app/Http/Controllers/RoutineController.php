@@ -85,7 +85,7 @@ class RoutineController extends Controller
      */
     public function delete(string $id)
     {
-        $routine=routine::all();
+        $routine=routine::findorfail($id);
         $routine->delete();
         return redirect()->route('admin.routines.index')->with('sucess','Routine deleted sucessfully');
     }

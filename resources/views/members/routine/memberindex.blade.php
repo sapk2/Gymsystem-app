@@ -4,7 +4,7 @@
     <div class="flex items-center justify-between mb-8">
         <h1 class="text-3xl font-bold text-sky-500 dark:text-gray-200">Your Workout Schedule</h1>
         <div class="bg-blue-100 dark:bg-sky-500 p-3 rounded-lg">
-            <span class="text-slate-100 dark:text-white-200 text-sm">Current Week: {{ now()->format('M j - M j, Y') }}</span>
+            <span class="text-slate-100 dark:text-white-200 text-sm">Current Week: {{ now()->format('M j, Y') }}</span>
         </div>
     </div>
 

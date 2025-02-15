@@ -29,10 +29,18 @@
                                 <span class="text-red-500">{{$message}}</span>
                             @enderror
                         </div>
+
                         <div class="mt-6">
                             <label for="phone_no" class="block mb-2 text-sm font-medium text-white-700 dark:text-white-500" >Phone</label>
                             <input type="tel" name="phone_no" value="{{$trainer->phone_no}}" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50  focus:ring-blue-500 focus:border-blue-500 text-base dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
                             @error('phone_no')
+                            <span class="text-red-500">{{$message}}</span>
+                        @enderror
+                        </div>
+                        <div class="mt-6">
+                            <label for="image" class="block mb-2 text-base font-medium text-white-700 dark:text-white-500" >Image</label>
+                            <input type="file" name="image" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+                            @error('image')
                             <span class="text-red-500">{{$message}}</span>
                         @enderror
                         </div>

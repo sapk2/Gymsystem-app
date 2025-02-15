@@ -12,7 +12,8 @@ class trainer extends Model
         'user_id',
         'specialization',
         'phone_no',
-        'end_at'
+        'end_at',
+        'image'
 
     ];
     public function user(){

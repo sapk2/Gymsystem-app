@@ -21,8 +21,8 @@
         <div class="text-3xl font-bold text-white">{{$member}}</div>
         </div>
         <div class="bg-slate-500 shadow-md rounded-lg p-6 border border-slate-500 flex flex-col">
-        <h2 class="text-xl text-white">Total Users</h2>
-        <div class="text-3xl font-bold text-white">{{$usercount}}</div>
+        <h2 class="text-xl text-white">Total FAQ</h2>
+        <div class="text-3xl font-bold text-white">{{$contacts}}</div>
         </div>
         </div>
         </div>
