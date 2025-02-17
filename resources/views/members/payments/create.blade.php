@@ -55,6 +55,9 @@
                             <a href="{{route('members.dashboard')}}" class="bg-gray-500 hover:bg-gray-400 text-white font-bold py-2 px-6 rounded-lg shadow-md">Back</a>
                         </div>
                     </form>
+                    @error('error')
+                        <div class="text-red-500 text-sm">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
         </div>

@@ -35,7 +35,7 @@ class UserPaymentController extends Controller
             'payment_method' => 'required',
             'transaction_id' => 'required',
         ]);
-        
+
         Payment::create($data);
         return redirect()->route('members.payments.index')->with('success', 'Payment has been created successfully');
     }
@@ -46,10 +46,11 @@ class UserPaymentController extends Controller
             'amount' => 'required|numeric',
             'plan' => 'required'
         ]);
-     
+
+
         $user = Auth::user();
         $plan = Plan::findOrFail($request->plan);
-        $amount = $request->amount * 100; 
+        $amount = $request->amount * 100;
         $pid = uniqid();
 
         $curl = curl_init();
@@ -71,7 +72,7 @@ class UserPaymentController extends Controller
                 "customer_info" => [
                     "name" => $user->name,
                     "email" => $user->email,
-                    "phone" => $user->phone,
+                    "phone" => 9865000000,
                 ]
             ]),
             CURLOPT_HTTPHEADER => array(
@@ -87,20 +88,20 @@ class UserPaymentController extends Controller
         if (isset($responseBody['payment_url'])) {
             return redirect($responseBody['payment_url']);
         }
-
-        return back()->with('error', 'Failed to initiate Khalti payment.');
+        dd($responseBody);
+        return back()->with('error', value: 'Payment initiation failed.');
     }
 
     public function verify(Request $request)
     {
         //Log::info('Verify Request Data:', $request->all());
         $pidx = $request->query('pidx');
-        
+
 
         if (!$pidx) {
             return redirect()->route('members.payments.index')->with('error', 'Invalid transaction.');
         }
-        
+
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://a.khalti.com/api/v2/epayment/lookup/',
@@ -135,7 +136,7 @@ class UserPaymentController extends Controller
                     return redirect()->route('members.payments.create')->with('error', 'Transaction failed.');
             }
         }
-        
+
         return redirect()->route('members.payments.create')->with('error', 'Transaction verification failed.');
     }
 }
