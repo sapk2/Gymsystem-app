@@ -17,24 +17,24 @@
                 <input type="text" name="location"  value="{{ $footer->location ?? '' }}" id="location" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
             <div>
-                <label for="link" class="block text-sm font-medium text-gray-700">Link</label>
+                <label for="link" class="block text-sm font-medium text-gray-100">Link</label>
                 <input type="text" name="link" id="link"  value="{{ $footer->link ?? '' }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
             <div>
-                <label for="content" class="block text-sm font-medium text-gray-700">Content</label>
+                <label for="content" class="block text-sm font-medium text-gray-100">Content</label>
                 <input type="text" name="content" id="content"  value="{{ $footer->content ?? '' }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
             <div>
-                <label for="copyright" class="block text-sm font-medium text-gray-700">Copyright</label>
+                <label for="copyright" class="block text-sm font-medium text-gray-100">Copyright</label>
                 <input type="text" name="copyright" id="copyright"  value="{{ $footer->copyright ?? '' }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
             <div>
-                <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+                <label for="date" class="block text-sm font-medium text-gray-100">Date</label>
                 <input type="text" name="date" id="date"  value="{{ $footer->date ?? '' }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
         </div>  
         <div>
-            <label for="describe" class="block text-sm font-medium text-gray-700">Describe</label>
+            <label for="describe" class="block text-sm font-medium text-gray-100">Describe</label>
             <input type="text" name="describe"  value="{{ $footer->describe ?? '' }}" id="describe" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         </div>
         <div class="flex justify-center mt-6">

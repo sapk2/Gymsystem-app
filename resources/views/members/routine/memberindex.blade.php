@@ -16,52 +16,51 @@
         <h3 class="mt-4 text-lg font-medium text-gray-900 dark:text-gray-100">No scheduled workouts</h3>
         <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Contact your trainer to set up your exercise schedule.</p>
     </div>
-    @else
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        @foreach ($routine as $schedule)
-        <div class="relative bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-            <div class="p-6">
-                <div class="flex items-start justify-between mb-4">
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-1">
+@else
+    <div class="bg-white dark:bg-gray-700 rounded-xl shadow-md overflow-x-auto">
+        <table class="w-full">
+            <thead class="bg-gray-50 dark:bg-gray-600">
+                <tr>
+                    <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">Exercise</th>
+                    <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">Day</th>
+                    <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">Start Time</th>
+                    <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">End Time</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
+                @foreach ($routine as $schedule)
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-base font-semibold text-gray-800 dark:text-gray-200">
                             {{ $schedule->exercise_name }}
-                        </h3>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
                         <span class="text-sm text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900 px-3 py-1 rounded-full">
                             {{ $schedule->day_of_week }}
                         </span>
-                    </div>
-                    <div class="bg-indigo-100 dark:bg-indigo-800 p-3 rounded-lg">
-                        <svg class="w-6 h-6 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                    </div>
-                </div>
-
-                <div class="space-y-4 mt-6">
-                    <div class="flex items-center">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-400 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                        <span class="ml-3 text-gray-600 dark:text-gray-300">
-                            Starts: <span class="font-medium">{{ $schedule->start_time }}</span>
-                        </span>
-                    </div>
-
-                    <div class="flex items-center">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-400 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                        <span class="ml-3 text-gray-600 dark:text-gray-300">
-                            Ends: <span class="font-medium">{{ $schedule->end_time }}</span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="absolute bottom-0 inset-x-0 h-2 bg-gradient-to-r from-blue-400 to-purple-500 rounded-b-xl"></div>
-        </div>
-        @endforeach
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center text-gray-600 dark:text-gray-300">
+                            <svg class="w-5 h-5 mr-2 text-gray-400 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            {{ $schedule->start_time }}
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center text-gray-600 dark:text-gray-300">
+                            <svg class="w-5 h-5 mr-2 text-gray-400 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            {{ $schedule->end_time }}
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
-    @endif
+@endif
 </div>
 @endsection

@@ -124,7 +124,7 @@
 
             <!-- Quick Links -->
         <div class="space-y-4">
-            <h3 class="text-gray-600 font-semibold flex justify-end">Quick Links</h3>
+            <h3 class="text-gray-600 font-semibold flex justify-end">{{$footer->link}}</h3>
             <nav class="flex justify-end flex-row space-x-4"> <!-- Changed to flex-row and space-x-4 -->
                 <a href="#about" class="hover:text-red-500 transition-colors">About Us</a>
                 <a href="#subscription" class="hover:text-red-500 transition-colors">Our Plans</a>
@@ -133,7 +133,7 @@
         </div>
         <!-- Copyright -->
         <div class="border-t border-gray-700 mt-8 pt-8 text-center flex justify-end text-sm">
-            <p>&copy; {{ date('Y') }} {{$aboutus->title}}. All rights reserved.</p>
+            <p>&copy; {{ $footer->Copyright }}{{$footer->date}} {{$aboutus->title}}. All rights reserved.</p>
         </div>
         <p class="mt-2">Designed by Paribesh Sapkota</p>
     </div>

@@ -40,7 +40,7 @@
                 <li><a href="{{route('admin.payments.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Payments</a></li>
                 <li><a href="{{route('admin.users.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Users</a></li>
                 <li>
-                    <form action="{{ route('logout') }}" method="POST" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">
+                    <form action="{{ route('logout') }}" method="POST" class="block hover:bg-red-500 p-4 rounded-lg font-bold text-xl">
                         @csrf
                         <button type="submit" class="w-full text-left">Logout</button>
                     </form>
@@ -106,7 +106,7 @@
                             </li>
                         </ul>
                         <div class="py-2">
-                            <form action="{{ route('logout') }}" method="POST" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                            <form action="{{ route('logout') }}" method="POST" class="block px-4 py-2 text-sm text-red-700 hover:bg-gray-100 dark:hover:bg-red-600 dark:text-gray-200 dark:hover:text-white">
                                 @csrf
                                 <button type="submit" class="w-full text-left">sign out</button>
                             </form>
@@ -154,63 +154,60 @@
 
     <!-- Sidebar Toggle Script -->
     <script>
-        const sidebar = document.getElementById('sidebar');
-        const mainContent = document.getElementById('mainContent');
-        const overlay = document.getElementById('overlay');
-        const toggleButton = document.getElementById('toggleButton');
-        const closeSidebar = document.getElementById('closeSidebar');
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            const overlay = document.getElementById('overlay');
+            const toggleButton = document.getElementById('toggleButton');
+            const closeSidebar = document.getElementById('closeSidebar');
 
-        // Function to open the sidebar
-        function openSidebar() {
-            sidebar.classList.remove('-translate-x-full');
-            overlay.classList.remove('hidden');
-            overlay.classList.add('block');
-            mainContent.classList.add('blur-sm');
-        }
+            // Function to open the sidebar
+            function openSidebar() {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+                overlay.classList.add('block');
+                mainContent.classList.add('blur-sm');
+            }
 
-        // Function to close the sidebar
-        function closeSidebarFunction() {
-            sidebar.classList.add('-translate-x-full');
-            overlay.classList.add('hidden');
-            overlay.classList.remove('block');
-            mainContent.classList.remove('blur-sm');
-        }
+            // Function to close the sidebar
+            function closeSidebarFunction() {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+                overlay.classList.remove('block');
+                mainContent.classList.remove('blur-sm');
+            }
 
-        // Open the sidebar when the toggle button is clicked
-        toggleButton.addEventListener('click', openSidebar);
+            // Open the sidebar when the toggle button is clicked
+            toggleButton.addEventListener('click', openSidebar);
 
-        // Close the sidebar when the close button is clicked
-        closeSidebar.addEventListener('click', closeSidebarFunction);
+            // Close the sidebar when the close button is clicked
+            closeSidebar.addEventListener('click', closeSidebarFunction);
 
-        // Close the sidebar when clicking outside the sidebar
-        overlay.addEventListener('click', closeSidebarFunction);
+            // Close the sidebar when clicking outside the sidebar
+            overlay.addEventListener('click', closeSidebarFunction);
 
-        document.addEventListener("DOMContentLoaded", function () {
-    const dropdownButton = document.getElementById("dropdownUserAvatarButton");
-    const dropdownMenu = document.getElementById("dropdownAvatar");
+            document.addEventListener("DOMContentLoaded", function () {
+            const dropdownButton = document.getElementById("dropdownUserAvatarButton");
+            const dropdownMenu = document.getElementById("dropdownAvatar");
 
-    dropdownButton.addEventListener("click", function (event) {
-        event.stopPropagation(); // Prevent click from bubbling up
-        dropdownMenu.classList.toggle("hidden");
-    });
+            dropdownButton.addEventListener("click", function (event) {
+                event.stopPropagation(); // Prevent click from bubbling up
+                dropdownMenu.classList.toggle("hidden");
+            });
 
-    // Close dropdown when clicking outside
-    document.addEventListener("click", function (event) {
-        if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-            dropdownMenu.classList.add("hidden");
-        }
-    });
+            // Close dropdown when clicking outside
+            document.addEventListener("click", function (event) {
+                if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                    dropdownMenu.classList.add("hidden");
+                }
+            });
 
-    // Close dropdown on Escape key press
-    document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape") {
-            dropdownMenu.classList.add("hidden");
-        }
-    });
-
-
-});
-
+            // Close dropdown on Escape key press
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "Escape") {
+                    dropdownMenu.classList.add("hidden");
+                }
+            });
+        });
     </script>
     
 </body>

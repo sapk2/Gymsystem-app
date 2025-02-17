@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                @foreach ($userpayments as $payment)
+                @foreach ($userPayments as $payment)
                 <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                     <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">{{$loop->index+1}}</td>
                     <td class="px-4 py-3 text-sm font-medium text-gray-900 dark:text-gray-200">{{$payment->user->name}}</td>

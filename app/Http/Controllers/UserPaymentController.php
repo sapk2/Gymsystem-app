@@ -44,11 +44,11 @@ class UserPaymentController extends Controller
     {
         $request->validate([
             'amount' => 'required|numeric',
-            'plan_id' => 'required|exists:plans,id'
+            'plan' => 'required'
         ]);
-        
+     
         $user = Auth::user();
-        $plan = Plan::findOrFail($request->plan_id);
+        $plan = Plan::findOrFail($request->plan);
         $amount = $request->amount * 100; 
         $pid = uniqid();
 
@@ -64,7 +64,7 @@ class UserPaymentController extends Controller
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => json_encode([
                 "return_url" => route('members.payment.success'),
-                "website_url" => url('/'),
+                "website_url" => url('http://127.0.0.1:8000/'),
                 "amount" => $amount,
                 "purchase_order_id" => $pid,
                 "purchase_order_name" => $plan->name,

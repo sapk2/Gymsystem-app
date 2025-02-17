@@ -26,7 +26,7 @@
 
             <!-- Map & Location -->
             <div class="w-full lg:w-1/2 text-center " data-aos="fade-up-right" data-aos-delay="600">
-                <h2 class="text-2xl font-semibold mb-4 text-red-400">Where you can <span class="text-gray-600">find us</span></h2>
+                <h2 class="text-2xl font-semibold mb-4 text-red-400">{{$footer->map_heading}}</h2>
                 
                 <p class="mb-4 text-gray-600"><i class="fas fa-map-marker-alt text-red-400 mr-2"></i> 
                     120-240 Rio de Janeiro, State of Rio de Janeiro, Brazil</p>

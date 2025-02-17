@@ -52,12 +52,43 @@ class DashboardController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function trainerindex()
+    public function trainerIndex()
     {
-        $routine = routine::count();
-
-        return view('trainers.dashboard', compact('routine'));
+        // Fetch total members
+        $totalMembers = User::where('roles', 'member')->count();
+    
+        // Fetch total routines (classes)
+        $totalRoutines = Routine::count();
+    
+        // Fetch present members
+        $presentMembers = Attendance::where('status', 'Present')->count();
+        $absentMembers = $totalMembers - $presentMembers;
+    
+        // Fetch attendance data for chart
+        $attendanceData = Attendance::whereNotNull('check_in')
+            ->selectRaw('DATE(date) as date, COUNT(*) as total')
+            ->groupBy('date')
+            ->orderBy('date', 'asc')
+            ->pluck('total', 'date');
+    
+        // Fetch latest attendance records for table
+        $demoTable = Attendance::latest()->take(10)->get();
+    
+        // Calculate attendance percentage
+        $attendancePercentage = $totalMembers > 0 ? round(($presentMembers / $totalMembers) * 100, 2) : 0;
+    
+        return view('trainers.dashboard', compact(
+            'totalMembers',
+            'totalRoutines',
+            'attendanceData',
+            'presentMembers',
+            'absentMembers',
+            'demoTable',
+            'attendancePercentage'
+        ));
     }
+    
+    
 
     /**
      * Store a newly created resource in storage.

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\aboutus;
+use App\Models\Footer;
 use App\Models\Frontedcontent;
 use App\Models\plan;
 use App\Models\trainer;
@@ -20,7 +21,8 @@ class HomeController extends Controller
         $plan = plan::all();
         $trainer = trainer::all();
         $user=User::all();
-        return view('welcome', compact('user', 'aboutus', 'hero', 'plan', 'trainer','user'));
+        $footer =Footer::first();
+        return view('welcome', compact('user', 'aboutus', 'hero', 'plan', 'trainer','user','footer'));
     }
     public function aboutus()
     {

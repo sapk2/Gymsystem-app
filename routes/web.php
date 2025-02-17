@@ -172,7 +172,7 @@ Route::group(['middleware' => ['auth', 'member']], function () {
     Route::get('/members/payments-create', [UserPaymentController::class, 'create'])->name('members.payments.create');
     Route::post('/members/payments/store', [UserPaymentController::class, 'store'])->name('members.payments.store');
  //   Route::get('/members/payments/verify', [UserPaymentController::class, 'verify']) ->name('members.payments.verify');
-    Route::post('/payments/initiate', [UserPaymentController::class, 'initiate'])->name('members.payment.initiate');
+    Route::post('/members/payments/initiate', [UserPaymentController::class, 'initiate'])->name('members.payment.initiate');
     Route::get('/payments/success', [UserPaymentController::class, 'verify'])->name('members.payment.success');
 
     Route::get('/members/profile', [UserProfileController::class, 'edit'])->name('members.profile.edit');
