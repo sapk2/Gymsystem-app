@@ -18,6 +18,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Roles</th>
+                                <th>Phone No</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -28,6 +29,7 @@
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->roles}}</td>
+                                <td>{{$user->phone}}</td>
                                 <td class="flex space-x-2 ">
                                     <a href="{{route('admin.users.edit',$user->id)}}"class="bg-sky-500 text-white px-4 py-2 rounded-md hover:bg-sky-600">edit</a>
                                     <a href="{{route('admin.users.delete',$user->id)}}" onclick="return confirm('Are you sure?')" class="bg-red-600 text-white px-4 py-2  rounded-lg">Delete</a>

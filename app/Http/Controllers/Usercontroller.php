@@ -35,13 +35,15 @@ class Usercontroller extends Controller
             'name' => 'required',
             'email' => 'required',
             'password'=>Hash::make($request->password),
-            'roles' => 'required'
+            'roles' => 'required',
+            'phone'=>'required'
         ]);
         $user=User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'roles' => $request->roles,
+            'phone'=>$request->phone
    
         ]);
         $token =Password::createToken($user);
@@ -75,6 +77,7 @@ class Usercontroller extends Controller
             'name' => 'required',
             'email' => 'required',
             'roles' => 'required',
+             'phone'=>'required',
             'avatar'=>'nullable'
         ]);
         $user = User::findorfail($id);

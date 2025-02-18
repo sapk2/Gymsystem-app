@@ -23,8 +23,8 @@ class PaymentController extends Controller
     public function create()
     {
         $user=User::where('roles','member')->get();
-        
-        return view('admin.payments.create',compact('user'));
+        $plans =plan::all();
+        return view('admin.payments.create',compact('user','plans'));
     }
 
     /**
@@ -34,10 +34,11 @@ class PaymentController extends Controller
     {
         $data=$request->validate([
         'user_id'=>'required',
+        'plan_id'=>'required',
         'payment_date'=>'required',
         'amount'=>'required|integer',
         'payment_method'=>'required',
-        'transaction_id'=>'required',
+        'transaction_id' => 'nullable|unique:payments,transaction_id',
         'status'=>'required'
         ]);
         payment::create($data);
@@ -59,9 +60,10 @@ class PaymentController extends Controller
      */
     public function edit(string $id)
     {
-        $payments=payment::findorfail($id);
+        $payment=payment::findorfail($id);
         $user=User::where('roles','member')->get();
-        return view('admin.payments.edit',compact('payments','user'));
+        $plans=plan::all();
+        return view('admin.payments.edit',compact('payment','plans','user'));
     }
 
     /**
@@ -71,10 +73,10 @@ class PaymentController extends Controller
     {
         $data=$request->validate([
             'user_id'=>'required',
+            'plan_id'=>'required',
             'payment_date'=>'required',
             'amount'=>'required',
             'payment_method'=>'required',
-            'transaction_id'=>'required',
             'status'=>'required'
         ]);
         payment::findorfail($id)->update($data);

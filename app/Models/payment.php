@@ -10,6 +10,7 @@ class payment extends Model
     use HasFactory;
     protected $fillable=[
         'user_id',
+        'plan_id',
         'payment_date',
         'amount',
         'payment_method',
@@ -19,4 +20,9 @@ class payment extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+    public function plan()
+{
+    return $this->belongsTo(plan::class);
+}
+
 }

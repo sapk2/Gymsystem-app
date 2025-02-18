@@ -3,46 +3,25 @@
 <div class="container mx-auto px-4 py-6">
     <div class="flex items-center justify-between mb-6">
         <h1 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">Payment History</h1>
+    </div>
+    <hr class="border-t border-gray-300 dark:border-gray-100 w-full">
+    <div class=" mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        @foreach ($userPayments as $payment)
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm text-gray-500 dark:text-gray-300">SN: {{$loop->index+1}}</span>
+                    <span class="px-2.5 py-0.5 rounded-full text-xs font-medium {{ $payment->status == 'completed' ? 'bg-green-200 text-green-800' : 'bg-yellow-200 text-yellow-800' }}">
+                        {{ ucfirst($payment->status) }}
+                    </span>
+                </div>
+                <p class="text-sm text-gray-700 dark:text-gray-300"><strong>Name: {{$payment->plan->name}}</strong></p>
+                <p class="text-lg font-semibold text-gray-900 dark:text-gray-200">RS.{{ number_format($payment->amount, 2) }}</p>
+                <p class="text-sm text-gray-700 dark:text-gray-300">Date: {{$payment->payment_date}}</p>
+                <p class="text-sm font-mono text-blue-600 dark:text-blue-400 hover:underline">Transaction ID: {{$payment->transaction_id}}</p>
+            </div>
+        @endforeach
+    </div>
     
-    </div>
-
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-x-auto">
-        <table id="mytable" class="w-full">
-            <thead class="bg-gray-50 dark:bg-gray-700">
-                <tr>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">SN</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Member</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Date</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Amount</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Method</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Transaction ID</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                @foreach ($userPayments as $payment)
-                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                    <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">{{$loop->index+1}}</td>
-                    <td class="px-4 py-3 text-sm font-medium text-gray-900 dark:text-gray-200">{{$payment->user->name}}</td>
-                    <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">{{$payment->payment_date}}</td>
-                    <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-200 font-medium">RS.{{number_format($payment->amount, 2)}}</td>
-                    <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300 capitalize">{{$payment->payment_method}}</td>
-                    <td class="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400 hover:underline">{{$payment->transaction_id}}</td>
-                    <td class="px-4 py-3">
-                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium 
-                            @if($payment->status === 'complete')
-                                bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100
-                            @else
-                                bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100
-                            @endif">
-                            {{ucfirst($payment->status)}}
-                        </span>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
 </div>
 
 <script>

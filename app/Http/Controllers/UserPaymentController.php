@@ -11,8 +11,11 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
+
 class UserPaymentController extends Controller
-{
+{   
+   public $theplan;
+
     public function index()
     {
         $userPayments = Payment::where('user_id', Auth::id())->get();
@@ -23,6 +26,7 @@ class UserPaymentController extends Controller
     {
         $user = Auth::user();
         $plan = Plan::all();
+     
         return view('members.payments.create', compact('user', 'plan'));
     }
 
@@ -30,10 +34,12 @@ class UserPaymentController extends Controller
     {
         $data = $request->validate([
             'user_id' => 'required',
+            'plan_id'=>'required',
             'payment_date' => 'required',
             'amount' => 'required',
             'payment_method' => 'required',
             'transaction_id' => 'required',
+            
         ]);
 
         Payment::create($data);
@@ -44,35 +50,32 @@ class UserPaymentController extends Controller
     {
         $request->validate([
             'amount' => 'required|numeric',
-            'plan' => 'required'
+            'plan_id' => 'required'
         ]);
-
-
+    
         $user = Auth::user();
-        $plan = Plan::findOrFail($request->plan);
+        $theplan = Plan::findOrFail($request->plan_id); // Get the plan
         $amount = $request->amount * 100;
         $pid = uniqid();
-
+    
+        // Store plan ID in session
+        Session::put('plan_id', $theplan->id);
+    
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://dev.khalti.com/api/v2/epayment/initiate/',
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => json_encode([
                 "return_url" => route('members.payment.success'),
                 "website_url" => url('http://127.0.0.1:8000/'),
                 "amount" => $amount,
                 "purchase_order_id" => $pid,
-                "purchase_order_name" => $plan->name,
+                "purchase_order_name" => $theplan->name,
                 "customer_info" => [
                     "name" => $user->name,
                     "email" => $user->email,
-                    "phone" => 9865000000,
+                    "phone" => $user->phone,
                 ]
             ]),
             CURLOPT_HTTPHEADER => array(
@@ -80,28 +83,26 @@ class UserPaymentController extends Controller
                 'Content-Type: application/json',
             ),
         ));
-
+    
         $response = curl_exec($curl);
         curl_close($curl);
         $responseBody = json_decode($response, true);
-
+    
         if (isset($responseBody['payment_url'])) {
             return redirect($responseBody['payment_url']);
         }
-        dd($responseBody);
-        return back()->with('error', value: 'Payment initiation failed.');
+    
+        return back()->with('error', 'Payment initiation failed.');
     }
 
     public function verify(Request $request)
     {
-        //Log::info('Verify Request Data:', $request->all());
         $pidx = $request->query('pidx');
-
-
+    
         if (!$pidx) {
             return redirect()->route('members.payments.index')->with('error', 'Invalid transaction.');
         }
-
+    
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://a.khalti.com/api/v2/epayment/lookup/',
@@ -113,30 +114,38 @@ class UserPaymentController extends Controller
                 'Content-Type: application/json',
             ),
         ));
-
+    
         $response = curl_exec($curl);
         curl_close($curl);
         $responseBody = json_decode($response, true);
-
+    
         if (isset($responseBody['status'])) {
-            switch ($responseBody['status']) {
-                case 'Completed':
-                    Payment::create([
-                        'user_id' => Auth::id(),
-                        'payment_date' => Carbon::now(),
-                        'amount' => $responseBody['total_amount'] / 100,
-                        'payment_method' => 'Khalti',
-                        'transaction_id' => $pidx,
-                    ]);
-                    return redirect()->route('members.payments.index')->with('success', 'Transaction successful.');
-                case 'Expired':
-                case 'User canceled':
-                    return redirect()->route('members.payments.create')->with('error', 'Transaction failed.');
-                default:
-                    return redirect()->route('members.payments.create')->with('error', 'Transaction failed.');
+            $status = $responseBody['status'];
+            $amount = $responseBody['total_amount'] / 100;
+    
+            // Retrieve plan from session
+            $plan_id = Session::get('plan_id');
+            $theplan = Plan::findOrFail($plan_id);
+    
+            Payment::create([
+                'user_id' => Auth::id(),
+                'plan_id' => $theplan->id,
+                'payment_date' => Carbon::now(),
+                'amount' => $amount,
+                'payment_method' => 'Khalti',
+                'transaction_id' => $pidx,
+                'status' => $status,
+            ]);
+    
+            Session::forget('plan_id'); // Clear session after use
+    
+            if ($status === 'Completed') {
+                return redirect()->route('members.payments.index')->with('success', 'Transaction successful.');
+            } elseif ($status === 'Expired' || $status === 'User canceled') {
+                return redirect()->route('members.payments.create')->with('error', 'Transaction failed.');
             }
         }
-
+    
         return redirect()->route('members.payments.create')->with('error', 'Transaction verification failed.');
     }
 }

@@ -16,8 +16,10 @@
                             <tr>
                                 <th >SN</th>
                                 <th >Member Name</th>
+                                <th>PLan</th>
                                 <th >Payment Date</th>
                                 <th >Transaction id</th>
+
                                 <th >Actions</th>
                             </tr>
                         </thead>
@@ -26,6 +28,7 @@
                                 <tr>
                                     <td >{{$loop->index+1}}</td>
                                     <td >{{$payment->user->name}}</td>
+                                    <td>{{$payment->plan->name}}</td>
                                     <td >{{$payment->payment_date}}</td>
                                     <td >{{$payment->transaction_id}}</td>
                                     <td class="flex space-x-1">

@@ -17,7 +17,7 @@ class TrainerController extends Controller
      */
     public function index()
     {
-        $trainer = trainer::where('user_id', Auth::id())->get();
+        $trainer = trainer::all();
         return view('admin.managetrainers.index', compact('trainer'));
     }
 

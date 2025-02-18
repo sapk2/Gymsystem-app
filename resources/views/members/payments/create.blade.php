@@ -18,7 +18,7 @@
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Plan</label>
-                                <select name="plan" id="plan" class="w-full p-2.5 border border-gray-300 rounded-lg text-gray-900 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                <select name="plan_id" id="plan" class="w-full p-2.5 border border-gray-300 rounded-lg text-gray-900 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                     @foreach ($plan as $plan)
                                         <option value="{{$plan->id}}" 
                                             data-price="{{$plan->amount}}" >{{$plan->name}}</option>
@@ -27,7 +27,7 @@
                             </div>
                             <div>
                                 <label for="payment_date" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Payment Date</label>
-                                <input type="date" name="payment_date" id="payment_date" class="w-full p-2.5 border border-gray-300 rounded-lg text-gray-900 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                <input type="date" name="payment_date" id="payment_date" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" class="w-full p-2.5 border border-gray-300 rounded-lg text-gray-900 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 @error('payment_date')
                                     <span class="text-red-500 text-sm">{{$message}}</span>
                                 @enderror
@@ -43,8 +43,7 @@
                                 <input type="hidden" name="payment_method" value="khalti">
                             </div>
                             <div>
-                                <label for="transaction_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Transaction ID</label>
-                                <input type="text" name="transaction_id" id="transaction_id" class="w-full p-2.5 border border-gray-300 rounded-lg text-gray-900 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                <input type="hidden" name="transaction_id" id="transaction_id" class="w-full p-2.5 border border-gray-300 rounded-lg text-gray-900 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 @error('transaction_id')
                                     <span class="text-red-500 text-sm">{{$message}}</span>
                                 @enderror
