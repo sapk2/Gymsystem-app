@@ -9,28 +9,28 @@
                 </div>
                 <hr class="border border-green-200">
                 <div class="container mt-9">
-                    <table id="mytable" class="display table-auto w-full border-collapse border border-gray-300">
+                    <table id="mytable" class="display table-auto w-full border-collapse border border-gray-900">
                         <thead>
-                            <tr class="bg-gray-200 dark:bg-gray-700">
-                                <th class="px-4 py-2 border border-gray-300">SN</th>
-                                <th class="px-4 py-2 border border-gray-300">Plan</th>
-                                <th class="px-4 py-2 border border-gray-300">Gender</th>
-                                <th class="px-4 py-2 border border-gray-300">Date of Birth</th>
-                                <th class="px-4 py-2 border border-gray-300">phone</th>
-                                <th class="px-4 py-2 border border-gray-300">Joining</th>
-                                <th class="px-4 py-2 border border-gray-300">expiry</th>
+                            <tr class=" dark:bg-gray-700">
+                                <th>SN</th>
+                                <th>Plan</th>
+                                <th>Gender</th>
+                                <th>Date of Birth</th>
+                                <th>phone</th>
+                                <th>Joining</th>
+                                <th>expiry</th>
                             </tr>
                         </thead>
                         <tbody>
                           @foreach ($mem as $mem)
                               <tr>
-                                <td class="border px-2 py-4">{{$loop-> index+1}}</td>
-                                <td class="border px-2 py-4">{{$mem->plan->name }}</td>
-                                <td class="border px-2 py-4">{{$mem->gender}}</td>
-                                <td class="border px-2 py-4">{{$mem->dob}}</td>
-                                <td class="border px-2 py-4">{{$mem->phone_no}}</td>
-                                <td class="border px-2 py-4">{{$mem->joining_date}}</td>
-                                <td class="border px-2 py-4 ">{{$mem->expirydate}}</td>
+                                <td>{{$loop-> index+1}}</td>
+                                <td>{{$mem->plan->name }}</td>
+                                <td>{{$mem->gender}}</td>
+                                <td>{{$mem->dob}}</td>
+                                <td>{{$mem->phone_no}}</td>
+                                <td>{{$mem->joining_date}}</td>
+                                <td>{{$mem->expirydate}}</td>
                               </tr>
                           @endforeach
                         </tbody>

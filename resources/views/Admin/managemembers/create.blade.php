@@ -11,30 +11,25 @@
                 <form action="{{route('admin.managemembers.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                     <div class="grid gap-6 mb-6 md:grid-cols-2">
-                        <div>
-                            <label for="user_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">user</label>
-                            <select name="user_id" id="" class="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                <option value="">Users</option>
-                                @foreach ($user as $user)
-                                <option value="{{$user->id}}">{{$user->name}} - {{$user->email}}</option>
+                        <div class="mb-4">
+                            <label class="block text-gray-100 text-sm font-bold mb-2">Select Name</label>
+                            <select name="payment_id" id="payment_id" class=" bg-slate-600 shadow appearance-none border rounded w-full py-2 px-3 text-gray-100 leading-tight focus:outline-none focus:shadow-outline" required>
+                                <option value="">-- Select Name --</option>
+                                @foreach($payment as $payment)
+                                    <option value="{{ $payment->id }}" 
+                                            data-user-id="{{ $payment->user_id }}" 
+                                            data-plan-id="{{ $payment->plan_id }}">
+                                         {{ $payment->user->name }} | Plan: {{ $payment->plan->name }}
+                                    </option>
                                 @endforeach
                             </select>
-                            @error('user_id')
-                                <span class="text-red-500">{{$message}}</span>
+                            
+                            @error('payment_id')
+                                <p class="text-red-500 text-xs italic">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div>
-                            <label for="plan_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Plan</label>
-                            <select name="plan_id" id="plan_id" class="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
-                                <option value="">Plans</option>
-                                    @foreach($plan as $plan)
-                                    <option value="{{$plan->id}}">{{$plan->name}}</option>
-                                    @endforeach
-                            </select>
-                            @error('plan')
-                                <span class="text-red-500">{{$message}}</span>
-                            @enderror
-                        </div>   
+                        <input type="hidden" name="user_id" id="user_id">
+                        <input type="hidden" name="plan_id" id="plan_id"> 
                         <div>
                             <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >City</label>
                             <input type="text" id="city" class="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"   name="city_name"required/>
@@ -79,4 +74,12 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('payment_id').addEventListener('change', function () {
+        let selectedOption = this.options[this.selectedIndex];
+        document.getElementById('user_id').value = selectedOption.getAttribute('data-user-id') || '';
+        document.getElementById('plan_id').value = selectedOption.getAttribute('data-plan-id') || '';
+    });
+</script>
+
 @endsection

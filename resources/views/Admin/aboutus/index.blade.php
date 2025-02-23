@@ -1,8 +1,5 @@
 @extends('layouts.app')
-
 @section('content')
-
-    
     <div class="container mt-6">
         <h1 class="text-2xl text-white font-bold">ABOUT US</h1>
         <hr>

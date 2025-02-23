@@ -8,8 +8,6 @@ use App\Models\Frontedcontent;
 use App\Models\plan;
 use App\Models\trainer;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -24,6 +22,7 @@ class HomeController extends Controller
         $footer =Footer::first();
         return view('welcome', compact('user', 'aboutus', 'hero', 'plan', 'trainer','user','footer'));
     }
+
     public function aboutus()
     {
         $trainer =trainer::all();
@@ -31,11 +30,13 @@ class HomeController extends Controller
         $aboutus = aboutus::first();
         return view('partials.about', compact('aboutus','trainer','user'));
     }
+
     public function herofeature()
     {
         $hero = Frontedcontent::first();
         return view('partials.hero', compact('hero'));
     }
+
     public function contact()
     {
         return view('partials.contact');

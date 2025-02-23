@@ -7,8 +7,6 @@ use App\Models\Plan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 
@@ -26,7 +24,6 @@ class UserPaymentController extends Controller
     {
         $user = Auth::user();
         $plan = Plan::all();
-     
         return view('members.payments.create', compact('user', 'plan'));
     }
 
@@ -39,7 +36,6 @@ class UserPaymentController extends Controller
             'amount' => 'required',
             'payment_method' => 'required',
             'transaction_id' => 'required',
-            
         ]);
 
         Payment::create($data);
@@ -54,11 +50,9 @@ class UserPaymentController extends Controller
         ]);
     
         $user = Auth::user();
-        $theplan = Plan::findOrFail($request->plan_id); // Get the plan
+        $theplan = Plan::findOrFail($request->plan_id);
         $amount = $request->amount * 100;
         $pid = uniqid();
-    
-        // Store plan ID in session
         Session::put('plan_id', $theplan->id);
     
         $curl = curl_init();

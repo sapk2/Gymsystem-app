@@ -3,41 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Models\member;
+use App\Models\payment;
 use App\Models\plan;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class MembershipregisterCcontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   
     public function index()
     {
         $mem = member::all();
         $user = User::where('roles','member')->get();
+        $payment =payment::all();
         
-        return view('admin.managemembers.index', compact('mem','user'));
+        
+        return view('admin.managemembers.index', compact('mem','user','payment'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $user = User::where('roles','member')->get();
         $plan = plan::all();
-        return view('admin.managemembers.create', compact('user', 'plan'));
+        $payment =payment::all();
+        return view('admin.managemembers.create', compact('user','payment', 'plan'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $data = $request->validate([
             'user_id' => 'required',
-            'plan_id' => 'required',
             'city_name' => 'required',
             'state' => 'required',
             'gender' => 'required',
@@ -46,13 +41,15 @@ class MembershipregisterCcontroller extends Controller
             'joining_date' => 'required',
             'expirydate' => 'required'
         ]);
+        $payment = payment::where('user_id',$request->user_id)->latest()->first();
+        if (!$payment) {
+            return redirect()->back()->with('error','no payment found for this user');
+        }
+        $data['plan_id'] = $payment->plan_id;
         member::create($data);
         return redirect()->route('admin.managemembers.index')->with('sucess', 'Member has been registered !!');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $mem=member::findorfail($id);
@@ -61,25 +58,19 @@ class MembershipregisterCcontroller extends Controller
         return view('admin.managemembers.show',compact('mem','plan'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $user = User::all();
         $plan = plan::all();
         $mem = member::findorfail($id);
-        return view('admin.managemembers.edit', compact('user', 'plan', 'mem'));
+        $payment =payment::all();
+        return view('admin.managemembers.edit', compact('user', 'plan', 'payment','mem'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $data = $request->validate([
             'user_id' => 'required',
-            'plan_id' => 'required',
             'city_name' => 'required',
             'state' => 'required',
             'gender' => 'required',
@@ -88,14 +79,16 @@ class MembershipregisterCcontroller extends Controller
             'joining_date' => 'required',
             'expirydate' => 'required'
         ]);
+        $payment = Payment::where('user_id', $request->user_id)->latest()->first();
+        if (!$payment) {
+            return redirect()->back()->with('error', 'No payment record found for this user.');
+        }
+        $data['plan_id'] = $payment->plan_id;
         $mem = member::findorfail($id);
         $mem->update($data);
         return redirect()->route('admin.managemembers.index')->with('sucess', 'Data has been updated sucessfully!!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function delete(string $id)
     {
         $mem = member::findorfail($id);

@@ -70,7 +70,8 @@
     <!-- Detailed Health Data Table -->
     <div class="mb-8">
         <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4">Health History</h2>
-        <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+        <hr>
+        <div class="overflow-x-auto rounded-lg border mt-6 border-gray-200 dark:border-gray-700">
             <table id="health-table" class="w-full">
                 <thead>
                     <tr class="bg-gray-100 dark:bg-gray-800">

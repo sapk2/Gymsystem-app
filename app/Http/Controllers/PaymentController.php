@@ -8,18 +8,13 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   
     public function index()
     {
         $payments=payment::all();
             return view('admin.payments.index',compact('payments'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $user=User::where('roles','member')->get();
@@ -27,9 +22,6 @@ class PaymentController extends Controller
         return view('admin.payments.create',compact('user','plans'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $data=$request->validate([
@@ -45,19 +37,12 @@ class PaymentController extends Controller
         return redirect()->route('admin.payments.index')->with('sucess','Payment has been created sucessfully');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $payments=payment::findorfail($id);
-      //  dd($payments);
         return view('admin.payments.show',compact('payments'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $payment=payment::findorfail($id);
@@ -66,9 +51,6 @@ class PaymentController extends Controller
         return view('admin.payments.edit',compact('payment','plans','user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $data=$request->validate([
@@ -83,21 +65,16 @@ class PaymentController extends Controller
         return redirect()->route('admin.payments.index')->with('sucess','Payment has been updated sucessfully');
     }
     public function userupdate(Request $request, Payment $payment)
-{ 
-    $request->validate(['status' => 'required|string']);
-    $payment->update(['status' => $request->status]);
-    return back()->with('success', 'Payment status updated.');
-}
+    { 
+        $request->validate(['status' => 'required|string']);
+        $payment->update(['status' => $request->status]);
+        return back()->with('success', 'Payment status updated.');
+    }
 
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function delete(string $id)
     {
         $payment=payment::findorfail($id);
         $payment->delete();
         return redirect()->route('admin.payments.index')->with('sucess','Payment has been deleted sucessfully ');
     }
- 
 }

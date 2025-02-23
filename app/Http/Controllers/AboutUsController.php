@@ -7,17 +7,13 @@ use Illuminate\Http\Request;
 
 class AboutUsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         $aboutus=aboutus::first();
         return view('admin.aboutus.index',compact('aboutus'));
     }
-    /**
-     * Update the specified resource in storage.
-     */
+   
     public function update(Request $request)
     {
         $validated =$request->validate([
