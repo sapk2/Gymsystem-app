@@ -29,14 +29,39 @@
             <div class="p-4 flex justify-end items-center">
                 <button id="closeSidebar" class="text-white focus:outline-none">✖</button>
             </div>
-            <ul class="mt-2 ">
+            <ul class="mt-2">
                 <li><a href="{{route('admin.dashboard')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Dashboard</a></li>
                 <li><a href="{{route('admin.plans.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Subscription Plan</a></li>
-                <li><a href="{{route('admin.managemembers.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Membership</a></li>
-                <li><a href="{{route('admin.managetrainers.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Trainer</a></li>
-                <li><a href="{{route('admin.routines.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Schedules</a></li>
-                <li><a href="{{route('admin.attendances.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Attendance</a></li>
-                <li><a href="{{route('admin.healthstatus.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Health status</a></li>
+                
+                <!-- Manage Members Dropdown -->
+                <li x-data="{ isMembersOpen: false }" class="relative">
+                    <button @click="isMembersOpen = !isMembersOpen" class="w-full text-left hover:bg-gray-500 p-4 rounded-lg font-bold text-xl flex justify-between items-center">
+                        Manage Members
+                        <svg class="w-4 h-4 transform transition-transform" :class="{ 'rotate-180': isMembersOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <ul x-show="isMembersOpen" @click.outside="isMembersOpen = false" class="pl-4 space-y-2">
+                        <li><a href="{{route('admin.managemembers.index')}}" class="block hover:bg-gray-500 p-2 rounded-lg text-base">Membership</a></li>
+                        <li><a href="{{route('admin.managetrainers.index')}}" class="block hover:bg-gray-500 p-2 text-base rounded-lg">Trainer</a></li>
+                    </ul>
+                </li>
+        
+                <!-- Attendance Dropdown -->
+                <li x-data="{ isAttendanceOpen: false }" class="relative">
+                    <button @click="isAttendanceOpen = !isAttendanceOpen" class="w-full text-left hover:bg-gray-500 p-4 rounded-lg font-bold text-xl flex justify-between items-center">
+                        Status
+                        <svg class="w-4 h-4 transform transition-transform" :class="{ 'rotate-180': isAttendanceOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <ul x-show="isAttendanceOpen" @click.outside="isAttendanceOpen = false" class="pl-4 space-y-2">
+                        <li><a href="{{route('admin.attendances.index')}}" class="block hover:bg-gray-500 p-2  text-base rounded-lg">Attendance</a></li>
+                        <li><a href="{{route('admin.routines.index')}}" class="block hover:bg-gray-500 p-2  text-base rounded-lg">Schedules</a></li>
+                        <li><a href="{{route('admin.healthstatus.index')}}" class="block hover:bg-gray-500 p-2 text-base rounded-lg">Health Status</a></li>
+                    </ul>
+                </li>
+        
                 <li><a href="{{route('admin.payments.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Payments</a></li>
                 <li><a href="{{route('admin.users.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Users</a></li>
                 <li>
@@ -106,7 +131,7 @@
                             </li>
                         </ul>
                         <div class="py-2">
-                            <form action="{{ route('logout') }}" method="POST" class="block px-4 py-2 text-sm text-red-700 hover:bg-gray-100 dark:hover:bg-red-600 dark:text-gray-200 dark:hover:text-white">
+                            <form action="{{ route('logout') }}" method="POST" class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-100 dark:hover:bg-red-500 dark:text-gray-200 dark:hover:text-white">
                                 @csrf
                                 <button type="submit" class="w-full text-left">sign out</button>
                             </form>
