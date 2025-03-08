@@ -67,7 +67,7 @@ class DashboardController extends Controller
             'absentMembers',
             'demoTable',
             'attendancePercentage',
-            'faq'
+            
         ));
     }
 

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Session;
 
 class UserPaymentController extends Controller
 {   
-   public $theplan;
+    public $theplan;
 
     public function index()
     {

@@ -86,7 +86,7 @@
                     <label for="image" class="block text-gray-100 mt-2 font-medium">Image</label>
                     <input type="file" name="image" id="image" class="w-full">
                     @if(isset($hero) && $hero->image)
-                        <img src="{{ asset('storage/' . $hero->image) }}" alt="About Us Image" class="w-32 h-32 rounded mb-2">
+                        <img src="{{ asset('storage/' . $hero->image) }}" alt="bg-image" class="w-32 h-32 rounded mb-2">
                     @endif
                 </div>
                 <div>
