@@ -16,6 +16,9 @@
                                    class="block w-full rounded-md border-gray-300 shadow-sm 
                                           focus:border-indigo-500 focus:ring-indigo-500 bg-gray-600 opacity-75" 
                                    value="{{ $contacts->email }}" readonly>
+                                   @error('to')
+                                       <span class="text-red-600">{{ $message }}</span>
+                                   @enderror
                         </div>
                     </div>
 
@@ -26,6 +29,9 @@
                                    class="block w-full rounded-md bg-slate-600 border-gray-300 text-white shadow-sm 
                                           focus:border-indigo-500 focus:ring-indigo-500" 
                                    value="Re: {{ $contacts->subject }}">
+                                   @error('subject')
+                                       <span class="text-red-600">{{ $message }}</span>
+                                   @enderror
                         </div>
                     </div>
 
@@ -35,6 +41,9 @@
                             <textarea name="reply" id="reply" rows="4" 
                                       class="block w-full rounded-md border-gray-300 shadow-sm 
                                             bg-slate-600 text-white focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+                                            @error('reply')
+                                       <span class="text-red-600">{{ $message }}</span>
+                                   @enderror
                         </div>
                     </div>
 
@@ -50,7 +59,11 @@
                     </div>
                 </form>
             </div>
-            <a href="{{route('admin.contacts.index')}}" class="mb-3 text-white text-lg font-mono px-4 py-4 ">back</a>
+            <a href="{{route('admin.contacts.index')}}" class="mb-3 text-white text-lg font-mono px-4 py-4 inline-block hover:text-gray-200 transition-colors" aria-label="Back">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+            </a>
         </div>
     </div>
 </div>
