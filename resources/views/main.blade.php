@@ -58,8 +58,7 @@
             <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="lg:hidden text-gray-300 hover:text-red-500 focus:outline-none">
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                          d="M4 6h16M4 12h16M4 18h16"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                 </svg>
             </button>
         </div>
@@ -82,10 +81,10 @@
                      <a href="{{ route('trainers.dashboard') }}" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-all duration-300">Welcome {{auth()->user()->name}}</a>
                  @elseif(Auth::user()->roles == 'member')
                  <a href="{{ route('members.dashboard') }}" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-all duration-300">
-                     Welcome {{ auth()->user()->name }}
-                 </a>
+                    Welcome {{ auth()->user()->name }}
+                </a>
                  
-                 @endif
+                @endif
              @else
              <div class=" mt-2 flex  space-x-1 justify-center">
                 <a href="{{ route('login') }}" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-all duration-300">Log in</a>
