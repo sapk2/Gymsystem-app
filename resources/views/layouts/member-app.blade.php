@@ -39,9 +39,9 @@
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
                             <a href="{{route('members.dashboard')}}" class="bg-gray-500 text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
-                            <a href="{{route('members.routine.memberindex')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">My Schedules </a>
-                            <a href="{{route('members.subscribedplan')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"> My subscription</a>
-                            <a href="{{route('members.payments.index')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"> My payments</a>
+                            <a href="{{route('members.routine.memberindex')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"> Schedules </a>
+                            <a href="{{route('members.subscribedplan')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">  Subscription</a>
+                            <a href="{{route('members.payments.index')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"> payments</a>
                             
                             
                         </div>

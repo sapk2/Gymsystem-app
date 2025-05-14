@@ -66,7 +66,6 @@
             </div>
         @endif
     </div>
-
     <!-- Detailed Health Data Table -->
     <div class="mb-8">
         <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4">Health History</h2>
@@ -120,5 +119,6 @@
         }
     });
 </script>
+
 
 @endsection

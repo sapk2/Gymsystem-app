@@ -34,11 +34,11 @@ class UserPaymentController extends Controller
             'plan_id'=>'required',
             'payment_date' => 'required',
             'amount' => 'required',
-            'payment_method' => 'required',
-            'transaction_id' => 'required',
+            'payment_method' => 'required'
         ]);
 
         Payment::create($data);
+        //dd($data);
         return redirect()->route('members.payments.index')->with('success', 'Payment has been created successfully');
     }
 

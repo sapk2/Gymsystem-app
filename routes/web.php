@@ -150,6 +150,7 @@ Route::group(['middleware' => ['auth', 'member']], function () {
     Route::get('/member/memberindex', [RoutineController::class, 'memberindex'])->name('members.routine.memberindex');
     /**********************************************Member plans******************************************************************************************/
     Route::get('/member/subscribedplan', [PlansController::class, 'memberplan'])->name('members.subscribedplan');
+
 });
 
 require __DIR__ . '/auth.php';

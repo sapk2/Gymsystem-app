@@ -59,7 +59,7 @@ class DashboardController extends Controller
             ->pluck('total', 'date');
         $demoTable = Attendance::latest()->take(10)->get();
         $attendancePercentage = $totalMembers > 0 ? round(($presentMembers / $totalMembers) * 100, 2) : 0;
-        return view('trainers.dashboard', compact(
+        return view('Trainers.dashboard', compact(
             'totalMembers',
             'totalRoutines',
             'attendanceData',
@@ -79,9 +79,7 @@ class DashboardController extends Controller
             'health' => Health::where('user_id', $user->id)
                             ->latest()
                             ->get(),
-            'latestHealth' => Health::where('user_id', $user->id)
-                                 ->latest()
-                                 ->first(),
+            'latestHealth' => Health::where('user_id', $user->id)->latest()->first(),
             'user' => $user
         ]);
     }

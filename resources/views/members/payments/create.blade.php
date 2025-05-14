@@ -43,7 +43,7 @@
                                 <input type="hidden" name="payment_method" value="khalti">
                             </div>
                             <div>
-                                <input type="hidden" name="transaction_id" id="transaction_id" class="w-full p-2.5 border border-gray-300 rounded-lg text-gray-900 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                <input type="hidden" name="transaction_id"  id="transaction_id" class="w-full p-2.5 border border-gray-300 rounded-lg text-gray-900 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 @error('transaction_id')
                                     <span class="text-red-500 text-sm">{{$message}}</span>
                                 @enderror
