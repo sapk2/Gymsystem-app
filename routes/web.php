@@ -15,6 +15,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PlansController;
 use App\Http\Controllers\TrainerProfileController;
 use App\Http\Controllers\RoutineController;
+use App\Http\Controllers\SubscribedController;
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\TrainerScheduleController;
 use App\Http\Controllers\Usercontroller;
@@ -149,7 +150,8 @@ Route::group(['middleware' => ['auth', 'member']], function () {
 /*********************************************Member Member routine**********************************************************************************************/
     Route::get('/member/memberindex', [RoutineController::class, 'memberindex'])->name('members.routine.memberindex');
     /**********************************************Member plans******************************************************************************************/
-    Route::get('/member/subscribedplan', [PlansController::class, 'memberplan'])->name('members.subscribedplan');
+    Route::get('/member/subscribedplan', [SubscribedController::class, 'memberplan'])->name('members.subscribedplan');
+Route::post('/member/renew/{id}', [SubscribedController::class, 'renew'])->name('members.renew');
 
 });
 

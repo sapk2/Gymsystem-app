@@ -34,7 +34,7 @@
                                     <td >RS.{{$plan->amount}}</td>
                                     <td class=" flex space-x-1">
                                         <a href="{{route('admin.plans.edit',$plan->id)}}" class="bg-sky-500 text-white px-4 py-2 rounded-xl hover:bg-sky-600">Edit</a>
-                                        <a href="{{route('admin.plans.delete',$plan->id)}}"  onclick="return confirm('Are you sure?')" class="bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-600">Delete</a>
+                                        <a href="{{route('admin.plans.delete',$plan->id)}}"  onclick="return confirm('Are you sure to delete ?')" class="bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-600">Delete</a>
                                     </td>
                                 </tr>                                
                             @endforeach

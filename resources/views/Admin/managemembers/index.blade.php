@@ -32,7 +32,7 @@
                                 <td class="flex space-x-1 ">
                                     <a href="{{route('admin.managemembers.show',$mem->id)}}" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Details</a>
                                     <a href="{{route('admin.managemembers.edit',$mem->id)}}" class="bg-sky-500 text-white px-4 py-2 rounded-md hover:bg-sky-600">edit</a>
-                                    <a href="{{route('admin.managemembers.delete',$mem->id)}}" class="bg-red-600 text-white px-4 py-2  rounded-lg" onclick="return confirm('Are you sure?')">Delete</a>
+                                    <a href="{{route('admin.managemembers.delete',$mem->id)}}" class="bg-red-600 text-white px-4 py-2  rounded-lg" onclick="return confirm('Are you sure to delete?')">Delete</a>
                                 </td>
                               </tr>
                           @endforeach

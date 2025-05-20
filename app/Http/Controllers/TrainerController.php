@@ -28,7 +28,6 @@ class TrainerController extends Controller
             'user_id' => 'required|unique:trainers,user_id',
             'specialization' => 'required',
             'phone_no' => 'required',
-            'end_at' => 'required',
             'image' => 'nullable'
 
         ]);
@@ -53,7 +52,6 @@ class TrainerController extends Controller
             'user_id' => 'required',
             'specialization' => 'required',
             'phone_no' => 'required',
-            'end_at' => 'required',
             'image'=>'nullable'
         ]);
         $trainer = trainer::findorfail($id);
