@@ -151,7 +151,7 @@ Route::group(['middleware' => ['auth', 'member']], function () {
     Route::get('/member/memberindex', [RoutineController::class, 'memberindex'])->name('members.routine.memberindex');
     /**********************************************Member plans******************************************************************************************/
     Route::get('/member/subscribedplan', [SubscribedController::class, 'memberplan'])->name('members.subscribedplan');
-Route::post('/member/renew/{id}', [SubscribedController::class, 'renew'])->name('members.renew');
+    Route::post('/member/renew/{id}', [SubscribedController::class, 'renew'])->name('members.renew');
 
 });
 
