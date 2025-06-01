@@ -24,6 +24,7 @@ class UserPaymentController extends Controller
     {
         $user = Auth::user();
         $plan = Plan::all();
+        //dd($plan);
         return view('members.payments.create', compact('user', 'plan'));
     }
 
@@ -81,7 +82,6 @@ class UserPaymentController extends Controller
         $response = curl_exec($curl);
         curl_close($curl);
         $responseBody = json_decode($response, true);
-    
         if (isset($responseBody['payment_url'])) {
             return redirect($responseBody['payment_url']);
         }
