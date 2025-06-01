@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\member;
 use App\Models\Payment;
 use App\Models\Plan;
 use Carbon\Carbon;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Session;
 
 
 class UserPaymentController extends Controller
-{   
+{
     public $theplan;
 
     public function index()
@@ -31,7 +32,7 @@ class UserPaymentController extends Controller
     {
         $data = $request->validate([
             'user_id' => 'required',
-            'plan_id'=>'required',
+            'plan_id' => 'required',
             'payment_date' => 'required',
             'amount' => 'required',
             'payment_method' => 'required'
@@ -48,13 +49,12 @@ class UserPaymentController extends Controller
             'amount' => 'required|numeric',
             'plan_id' => 'required'
         ]);
-    
         $user = Auth::user();
         $theplan = Plan::findOrFail($request->plan_id);
         $amount = $request->amount * 100;
         $pid = uniqid();
         Session::put('plan_id', $theplan->id);
-    
+
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://dev.khalti.com/api/v2/epayment/initiate/',
@@ -69,7 +69,7 @@ class UserPaymentController extends Controller
                 "customer_info" => [
                     "name" => $user->name,
                     "email" => $user->email,
-                    "phone" => $user->phone,
+                    "phone" => $user->phone ? $user->phone : 9800000000, // Default phone if not set
                 ]
             ]),
             CURLOPT_HTTPHEADER => array(
@@ -77,26 +77,26 @@ class UserPaymentController extends Controller
                 'Content-Type: application/json',
             ),
         ));
-    
+
         $response = curl_exec($curl);
         curl_close($curl);
         $responseBody = json_decode($response, true);
-    
+
         if (isset($responseBody['payment_url'])) {
             return redirect($responseBody['payment_url']);
         }
-    
+
         return back()->with('error', 'Payment initiation failed.');
     }
 
     public function verify(Request $request)
     {
         $pidx = $request->query('pidx');
-    
+
         if (!$pidx) {
             return redirect()->route('members.payments.index')->with('error', 'Invalid transaction.');
         }
-    
+
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://a.khalti.com/api/v2/epayment/lookup/',
@@ -108,19 +108,19 @@ class UserPaymentController extends Controller
                 'Content-Type: application/json',
             ),
         ));
-    
+
         $response = curl_exec($curl);
         curl_close($curl);
         $responseBody = json_decode($response, true);
-    
+
         if (isset($responseBody['status'])) {
             $status = $responseBody['status'];
             $amount = $responseBody['total_amount'] / 100;
-    
+
             // Retrieve plan from session
             $plan_id = Session::get('plan_id');
             $theplan = Plan::findOrFail($plan_id);
-    
+
             Payment::create([
                 'user_id' => Auth::id(),
                 'plan_id' => $theplan->id,
@@ -130,16 +130,23 @@ class UserPaymentController extends Controller
                 'transaction_id' => $pidx,
                 'status' => $status,
             ]);
-    
+            $expiryDate = Carbon::now()->addDays(value: $theplan->validity * 30);
+            member::create([
+                'user_id' => Auth::id(),
+                'plan_id' => $theplan->id,
+                'joining_date' => Carbon::now(),
+                'expirydate' => $expiryDate,
+            ]);
+
             Session::forget('plan_id'); // Clear session after use
-    
+
             if ($status === 'Completed') {
                 return redirect()->route('members.payments.index')->with('success', 'Transaction successful.');
             } elseif ($status === 'Expired' || $status === 'User canceled') {
                 return redirect()->route('members.payments.create')->with('error', 'Transaction failed.');
             }
         }
-    
+
         return redirect()->route('members.payments.create')->with('error', 'Transaction verification failed.');
     }
 }
