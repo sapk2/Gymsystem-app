@@ -1,5 +1,8 @@
 @extends('layouts.trainer-app')
 @section('content')
+
+<a href="{{ route('trainers.dashboard') }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">dashboard</a>
+
 <div class="py-12">
     <div class="max-w-9xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -18,21 +21,21 @@
                                 <th>Phone</th>
                                 <th>Specialization</th>
                                 <th>joining</th>
-                                <th>Expiry on</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
-                          @foreach ($trainer as $trainer)
-                              <tr>
-                                <td>{{$loop-> index+1}}</td>
-                                <td>{{$trainer->user->name }}</td>
-                                <td>{{$trainer->user->email }}</td>
-                                <td>{{$trainer->phone_no}}</td>
-                                <td>{{$trainer->specialization}}</td>
-                                <td>{{$trainer->created_at}}</td>
-                                <td>{{$trainer->end_at}}</td>
-                              </tr>
-                          @endforeach
+                        @foreach ($trainer as $trainers)
+                            <tr>
+                                <td>{{$loop->index + 1}}</td>
+                                <td>{{$trainers->user->name}}</td>
+                                <td>{{$trainers->user->email}}</td>
+                                <td>{{$trainers->phone_no}}</td>
+                                <td>{{$trainers->specialization}}</td>
+                                <td>{{$trainers->created_at}}</td>
+                            </tr>
+                        @endforeach
+
                         </tbody>
                     </table>
                 </div>

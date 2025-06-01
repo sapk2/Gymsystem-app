@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.trainer-app')
 @section('content')
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -8,7 +8,7 @@
                     <h1 class="text-bold text-2xl trxt-white">create</h1>
                     <hr class="border border-gray-300 my-4"> 
                     <div class="mt-6">
-                        <form action="{{route('admin.healthstatus.store')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{route('Trainers.status.store')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="grid gap-6 mb-6 md:grid-cols-2">
                                 <div class="mb-4">
@@ -80,7 +80,7 @@
                             </div>
                             <div class="flex justify-center mt-6">
                                 <input type="submit" value="Submit"  class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-                                <a href="{{route('admin.healthstatus.index')}}" class="bg-gray-500 hover:bg-gray-400 text-white ml-4 font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded">Cancel</a>
+                                <a href="{{route('Trainers.status.index')}}" class="bg-gray-500 hover:bg-gray-400 text-white ml-4 font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded">Cancel</a>
                             </div>
                             
                         </form>

@@ -71,7 +71,7 @@
 
     <!-- Right Side: FAQ Section -->
     <div class="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 shadow-sm">
-        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">Frequently Asked Questions</h2>
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">Contact Feedback</h2>
         <hr>
         <div class="grid grid-cols-1 gap-4 mt-6" x-data="{ open: null }">
             @forelse ($faq as $index => $faq)

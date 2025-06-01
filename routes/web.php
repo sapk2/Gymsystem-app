@@ -6,6 +6,8 @@ use App\Http\Controllers\AttendenceController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EntrylogController;
+use App\Http\Controllers\FitnessStatusController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\FrontedController;
 use App\Http\Controllers\HealthController;
@@ -132,6 +134,22 @@ Route::middleware('Trainer')->group(function () {
     Route::get('/trainers/profile', [TrainerProfileController::class, 'edit'])->name('trainers.profile.edit');
     Route::post('/trainers/profile', [TrainerProfileController::class, 'update'])->name('trainers.profile.update');
     Route::delete('/trainers/profile', [TrainerProfileController::class, 'destroy'])->name('trainers.profile.destroy');
+    /*********************************************Trainer entrylog******************************************************************************************/ 
+    Route::get('/trainers/entrylogs',[EntrylogController::class,'index'])->name('Trainers.entrylogs.index');
+    Route::get('/trainers/entrylogs-create',[EntrylogController::class,'create'])->name('Trainers.entrylogs.create');
+    Route::post('/trainers/entrylogs/store',[EntrylogController::class,'store'])->name('Trainers.entrylogs.store');
+    Route::get('/trainers/entrylogs/{id}/edit',[EntrylogController::class,'edit'])->name('Trainers.entrylogs.edit');
+    Route::post('/trainers/entrylogs/{id}/update',[EntrylogController::class,'update'])->name('Trainers.entrylogs.update');
+    Route::get('/trainers/entrylogs/{id}/delete',[EntrylogController::class,'delete'])->name('Trainers.entrylogs.delete'); 
+    Route::get('/trainers/entrylogs/{id}/show',[EntrylogController::class,'show'])->name('Trainers.entrylogs.show');
+    /*********************************************Trainer fitness status******************************************************************************************/
+    Route::get('/trainers/status', [FitnessStatusController::class, 'index'])->name('Trainers.status.index');
+    Route::get('/trainers/status-create',[FitnessStatusController::class,'create'])->name('Trainers.status.create');
+    Route::post('/trainers/status/store',[FitnessStatusController::class,'store'])->name('Trainers.status.store');
+    Route::get('/trainers/status/{id}/edit',[FitnessStatusController::class,'edit'])->name('Trainers.status.edit');
+    Route::post('/trainers/status/{id}/update',[FitnessStatusController::class,'update'])->name('Trainers.status.update');
+    Route::get('/trainers/status/{id}/delete',[FitnessStatusController::class,'delete'])->name('Trainers.status.delete');
+    Route::get('/trainers/status/{id}/show',[FitnessStatusController::class,'show'])->name('Trainers.status.show');
 });
 
 Route::group(['middleware' => ['auth', 'member']], function () {

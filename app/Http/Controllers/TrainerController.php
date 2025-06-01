@@ -76,7 +76,7 @@ class TrainerController extends Controller
     public function trainershow()
     {
         $trainer = trainer::where('user_id', Auth::id())->get();
-        return view('trainers.membership.index', compact('trainer'));
+        return view('Trainers.membership.index', compact('trainer'));
     }
 
 

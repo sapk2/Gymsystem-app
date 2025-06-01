@@ -19,7 +19,8 @@
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
     <!-- Vite -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+
 </head>
 <body class="font-sans antialiased bg-gray-100 dark:bg-gray-900">
     <div class="min-h-screen flex relative">
@@ -32,7 +33,8 @@
                 <li><a href="{{route('trainers.dashboard')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Dashboard</a></li>
                 <li><a href="{{route('trainers.membership.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Membership</a></li>
                 <li><a href="{{route('trainers.routines.index')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Schedules</a></li>
-                <li><a href="{{route('trainers.memberhealth')}}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Member's Health</a></li>
+                <li><a href="{{ route('Trainers.entrylogs.index') }}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Entry logs</a></li>
+                <li><a href="{{ route('Trainers.status.index') }}" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">Health status</a></li>
                 <li>
                     <form action="{{ route('logout') }}" method="POST" class="block hover:bg-gray-500 p-4 rounded-lg font-bold text-xl">
                         @csrf
@@ -58,7 +60,6 @@
                         @else
                         <img class="w-8 h-8 rounded-full" src="{{asset('/img/profile.jpg')}}" alt="user photo">
                         @endif
-                       
                     </button>
                     <!-- Dropdown menu -->
                     <div id="dropdownAvatar" class="z-10 hidden absolute right-0 mt-9 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
@@ -75,7 +76,7 @@
                             </li>
                         </ul>
                         <div class="py-2">
-                            <form action="{{ route('logout') }}" method="POST" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                            <form action="{{ route('logout') }}" method="POST" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-red-600 dark:text-gray-200 dark:hover:text-white">
                                 @csrf
                                 <button type="submit" class="w-full text-left">sign out</button>
                             </form>

@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './status.css';
 
 .ql-picker-label {
     color: white!important;

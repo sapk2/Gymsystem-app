@@ -46,30 +46,35 @@ class DashboardController extends Controller
         ));
     }
 
-    public function trainerIndex()
-    {
-        $totalMembers = User::where('roles', 'member')->count();
-        $totalRoutines = Routine::count();
-        $presentMembers = Attendance::where('status', 'Present')->count();
-        $absentMembers = $totalMembers - $presentMembers;
-        $attendanceData = Attendance::whereNotNull('check_in')
-            ->selectRaw('DATE(date) as date, COUNT(*) as total')
-            ->groupBy('date')
-            ->orderBy('date', 'asc')
-            ->pluck('total', 'date');
-        $demoTable = Attendance::latest()->take(10)->get();
-        $attendancePercentage = $totalMembers > 0 ? round(($presentMembers / $totalMembers) * 100, 2) : 0;
-        return view('Trainers.dashboard', compact(
-            'totalMembers',
-            'totalRoutines',
-            'attendanceData',
-            'presentMembers',
-            'absentMembers',
-            'demoTable',
-            'attendancePercentage',
-            
-        ));
-    }
+public function trainerIndex()
+{
+    $totalMembers = User::where('roles', 'member')->count();
+    $totalRoutines = Routine::count();
+    $presentMembers = Attendance::where('status', 'Present')->count();
+    $lateMembers = Attendance::where('status', 'Late')->count();
+    $absentMembers = $totalMembers - ($presentMembers + $lateMembers);
+    
+    $attendanceData = Attendance::whereNotNull('check_in')
+        ->selectRaw('DATE(date) as date, COUNT(*) as total')
+        ->groupBy('date')
+        ->orderBy('date', 'asc')
+        ->pluck('total', 'date');
+    
+    $demoTable = Attendance::latest()->take(10)->get();
+    $attendancePercentage = $totalMembers > 0 ? round(($presentMembers / $totalMembers) * 100, 2) : 0;
+
+    return view('Trainers.dashboard', compact(
+        'totalMembers',
+        'totalRoutines',
+        'attendanceData',
+        'presentMembers',
+        'lateMembers',
+        'absentMembers',
+        'demoTable',
+        'attendancePercentage'
+    ));
+}
+
 
     public function memberindex()
     {

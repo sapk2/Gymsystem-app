@@ -88,7 +88,7 @@
                                     <td class="px-4 py-3 text-gray-400">{{ $row->check_in ?? 'N/A' }}</td>
                                     <td class="px-4 py-3 text-gray-400">{{ $row->check_out ?? 'N/A' }}</td>
                                     <td class="px-4 py-3">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $row->status == 'Present' ? 'bg-green-900/50 text-green-400' : 'bg-red-900/50 text-red-400' }}">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $row->status == 'Present' ? 'bg-green-900/50 text-green-600' : 'bg-red-900/50 text-red-400' }}">
                                             {{ $row->status }}
                                         </span>
                                     </td>
@@ -108,9 +108,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const attendanceData = @json($attendanceData);
     const totalMembers = {{ $totalMembers }};
     const presentMembers = {{ $presentMembers }};
-    const absentMembers = totalMembers - presentMembers;
+    const lateMembers = {{ $lateMembers }};
+    const absentMembers = {{ $absentMembers }};
 
-    // Bar Chart Configuration
+    // Bar Chart (unchanged)
     if (Object.keys(attendanceData).length > 0) {
         new Chart(document.getElementById('attendanceChart'), {
             type: 'bar',
@@ -149,15 +150,23 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Pie Chart Configuration
+    // Updated Pie Chart
     new Chart(document.getElementById('memberAttendanceChart'), {
         type: 'pie',
         data: {
-            labels: ['Present', 'Absent'],
+            labels: ['Present', 'Late', 'Absent'],
             datasets: [{
-                data: [presentMembers, absentMembers],
-                backgroundColor: ['rgba(74, 222, 128, 0.8)', 'rgba(248, 113, 113, 0.8)'],
-                borderColor: ['rgba(74, 222, 128, 1)', 'rgba(248, 113, 113, 1)'],
+                data: [presentMembers, lateMembers, absentMembers],
+                backgroundColor: [
+                    'rgba(74, 222, 128, 0.8)',  // Green - Present
+                    'rgba(251, 191, 36, 0.8)',  // Yellow - Late
+                    'rgba(248, 113, 113, 0.8)'  // Red - Absent
+                ],
+                borderColor: [
+                    'rgba(74, 222, 128, 1)',
+                    'rgba(251, 191, 36, 1)',
+                    'rgba(248, 113, 113, 1)'
+                ],
                 borderWidth: 1
             }]
         },
@@ -174,4 +183,5 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+
 @endsection
