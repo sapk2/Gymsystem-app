@@ -19,9 +19,9 @@
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Plan</label>
                                 <select name="plan_id" id="plan" class="w-full p-2.5 border border-gray-300 rounded-lg text-gray-900 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                    @foreach ($plan as $plans)
-                                        <option value="{{$plans->id}}" 
-                                            data-price="{{$plans->amount}}" >{{$plans->name}}</option>
+                                    @foreach ($plan as $plan)
+                                        <option value="{{$plan->id}}" 
+                                            data-price="{{$plan->amount}}" >{{$plan->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -34,7 +34,7 @@
                             </div>
                             <div>
                                 <label for="amount" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Amount</label>
-                                <input type="number" value="{{ $plans->first()->amount }}" name="amount" id="amount" class="w-full p-2.5 border border-gray-300 rounded-lg text-gray-900 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white" readonly>
+                                <input type="number" name="amount" id="amount" class="w-full p-2.5 border border-gray-300 rounded-lg text-gray-900 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white" readonly>
                                 @error('amount')
                                     <span class="text-red-500 text-sm">{{$message}}</span>
                                 @enderror
@@ -69,5 +69,5 @@
                 $('#amount').val(price ? price : ''); // Update amount field
             });
         });
-</script>
+    </script>
 @endsection
