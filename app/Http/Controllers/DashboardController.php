@@ -76,18 +76,18 @@ public function trainerIndex()
 }
 
 
-    public function memberindex()
-    {
-        $user = Auth::user();
-        return view('members.dashboard', [
-            'plan' => Plan::all(),
-            'health' => Health::where('user_id', $user->id)
-                            ->latest()
-                            ->get(),
-            'latestHealth' => Health::where('user_id', $user->id)->latest()->first(),
-            'user' => $user
-        ]);
-    }
+   public function memberindex()
+{
+    $user = Auth::user();
+    $plan = Plan::all();
+    $health = Health::where('user_id', $user->id)->latest()->get();
+    $latestHealth = Health::where('user_id', $user->id)->latest()->first();
+
+    // You need to fetch HealthGoal here as well for the progress bar
+    $goal = \App\Models\HealthGoal::where('user_id', $user->id)->first();
+
+    return view('members.dashboard', compact('plan', 'health', 'latestHealth', 'goal', 'user'));
+}
 
 
 }

@@ -99,6 +99,12 @@
                                     </svg>
                                     Payment History
                                 </a>
+                                  <a href="{{ route('members.health-goals.index') }}" class="flex items-center px-3 py-2 text-sm text-gray-200 hover:bg-gray-600 rounded-lg group transition-colors">
+                                    <svg class="h-5 w-5 mr-3 text-gray-400 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                    </svg>
+                                    Health-goal
+                                </a>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit" class="w-full flex items-center px-3 py-2 text-sm text-red-300 hover:bg-red-800/20 rounded-lg group transition-colors">
@@ -125,6 +131,8 @@
                 <a href="{{route('members.dashboard')}}" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
                 <a href="{{route('members.routine.memberindex')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">My Schedules </a>
                 <a href="{{route('members.payments.index')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Payment</a>
+                <a href="{{ route('members.health-goals.index') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">My Health Goals</a>
+
                 
             </div>
         </div>

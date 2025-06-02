@@ -74,7 +74,7 @@ class UserPaymentController extends Controller
                 ]
             ]),
             CURLOPT_HTTPHEADER => array(
-                'Authorization: Key ' . env('KHALTI_LIVE_KEY'),
+                'Authorization: Key ' . env('LIVE_SECRET_KEY'),
                 'Content-Type: application/json',
             ),
         ));
@@ -82,7 +82,7 @@ class UserPaymentController extends Controller
         $response = curl_exec($curl);
         curl_close($curl);
         $responseBody = json_decode($response, true);
-    
+    //dd($responseBody);
         if (isset($responseBody['payment_url'])) {
             return redirect($responseBody['payment_url']);
         }
@@ -105,7 +105,7 @@ class UserPaymentController extends Controller
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => json_encode(['pidx' => $pidx]),
             CURLOPT_HTTPHEADER => array(
-                'Authorization: Key ' . env('KHALTI_LIVE_KEY'),
+                'Authorization: Key ' . env('LIVE_SECRET_KEY'),
                 'Content-Type: application/json',
             ),
         ));

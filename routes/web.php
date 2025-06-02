@@ -12,6 +12,7 @@ use App\Http\Controllers\FooterController;
 use App\Http\Controllers\FrontedController;
 use App\Http\Controllers\HealthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Member\HealthGoalController;
 use App\Http\Controllers\MembershipregisterCcontroller;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PlansController;
@@ -170,6 +171,8 @@ Route::group(['middleware' => ['auth', 'member']], function () {
     /**********************************************Member plans******************************************************************************************/
     Route::get('/member/subscribedplan', [SubscribedController::class, 'memberplan'])->name('members.subscribedplan');
     Route::post('/member/renew/{id}', [SubscribedController::class, 'renew'])->name('members.renew');
+    Route::get('/member/health-goals', [HealthGoalController::class, 'index'])->name('members.health-goals.index');
+    Route::post('/member/health-goals', [HealthGoalController::class, 'update'])->name('members.health-goals.update');
 
 });
 
