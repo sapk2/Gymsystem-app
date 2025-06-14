@@ -7,6 +7,7 @@ use App\Mail\SubscriptionExpiryReminderMail;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 
+
 class SendExpiryReminder extends Command
 {
     protected $signature = 'subscription:send-reminder';
